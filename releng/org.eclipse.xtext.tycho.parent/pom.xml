@@ -8,7 +8,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>1.2.0</tycho-version>
+		<tycho-version>1.3.0</tycho-version>
 		<xtend-maven-plugin-version>2.16.0.M1</xtend-maven-plugin-version>
 
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
