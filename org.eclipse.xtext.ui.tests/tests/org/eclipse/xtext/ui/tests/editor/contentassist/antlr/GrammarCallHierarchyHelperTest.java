@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug348427TestLanguageGrammarAccess;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 
@@ -33,10 +34,10 @@ public class GrammarCallHierarchyHelperTest extends AbstractXtextTests {
 	}
 	
 	@Test public void testCallHierarchy() {
-		Assert.assertFalse(newHelper().doSwitch(grammarAccess.getScenario1_1Rule()));
-		Assert.assertTrue(newHelper().doSwitch(grammarAccess.getScenario1_2Rule()));
-		Assert.assertTrue(newHelper().doSwitch(grammarAccess.getScenario1_3Rule()));
-		Assert.assertFalse(newHelper().doSwitch(grammarAccess.getScenario1_4Rule()));
+		assertFalse(newHelper().doSwitch(grammarAccess.getScenario1_1Rule()));
+		assertTrue(newHelper().doSwitch(grammarAccess.getScenario1_2Rule()));
+		assertTrue(newHelper().doSwitch(grammarAccess.getScenario1_3Rule()));
+		assertFalse(newHelper().doSwitch(grammarAccess.getScenario1_4Rule()));
 	}
 
 	private Switch<Boolean> newHelper() {

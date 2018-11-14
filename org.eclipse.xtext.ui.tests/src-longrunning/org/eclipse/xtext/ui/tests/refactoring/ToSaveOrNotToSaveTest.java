@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.refactoring;
 
 import static com.google.common.collect.Maps.*;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.expressions.EvaluationContext;
@@ -27,7 +28,7 @@ import org.eclipse.xtext.ui.testing.AbstractLinkedEditingIntegrationTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

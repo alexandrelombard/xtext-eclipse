@@ -11,19 +11,19 @@ import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IResource
 import org.eclipse.ltk.core.refactoring.resource.MoveResourcesDescriptor
 import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testlanguages.fileAware.ui.tests.FileAwareTestLanguageUiInjectorProvider
-import org.junit.Ignore
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.^extension.ExtendWith
 
-import static org.junit.Assert.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 @InjectWith(FileAwareTestLanguageUiInjectorProvider)
-@RunWith(XtextRunner)
+@ExtendWith(InjectionExtension)
 class ResourceMoveTest extends AbstractResourceRelocationTest {
 	
 	@Test 
@@ -146,7 +146,7 @@ class ResourceMoveTest extends AbstractResourceRelocationTest {
 		''')	
 	}
 	
-	@Test@Ignore
+	@Test @Disabled
 	def void testMoveDirectoryToRoot() {
  		val x = file('foo/bar/X.fileawaretestlanguage', '''
 			package foo.bar

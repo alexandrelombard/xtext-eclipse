@@ -8,14 +8,15 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import static com.google.common.collect.Iterables.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

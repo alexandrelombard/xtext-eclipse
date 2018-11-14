@@ -3,11 +3,12 @@
  */
 package org.eclipse.xtext.ui.tests.testlanguages.ide;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.Modules2;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
@@ -14,7 +16,7 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ChainedE
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.ValueLiteral;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -28,8 +30,8 @@ public class Bug326948WrongContextTest extends AbstractBug326948Test {
 	}
 
 	protected void assertContextAsExpected(ContentAssistContext context) {
-		assertTrue(String.valueOf(context.getPreviousModel()), context.getPreviousModel() instanceof ValueLiteral);
-		assertTrue(String.valueOf(context.getPreviousModel()), context.getCurrentModel() instanceof ChainedExpression);
+		assertTrue(context.getPreviousModel() instanceof ValueLiteral, String.valueOf(context.getPreviousModel()));
+		assertTrue(context.getCurrentModel() instanceof ChainedExpression, String.valueOf(context.getPreviousModel()));
 	}
 	
 	@Override

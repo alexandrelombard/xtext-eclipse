@@ -10,18 +10,18 @@ package org.eclipse.xtext.ui.tests.refactoring
 import org.eclipse.core.resources.IResource
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceDescriptor
 import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testlanguages.fileAware.ui.tests.FileAwareTestLanguageUiInjectorProvider
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.^extension.ExtendWith
 
-import static org.junit.Assert.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 @InjectWith(FileAwareTestLanguageUiInjectorProvider)
-@RunWith(XtextRunner)
+@ExtendWith(InjectionExtension)
 class ResourceRenameTest extends AbstractResourceRelocationTest {
 	
 	@Test 

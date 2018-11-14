@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -19,7 +21,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
@@ -35,7 +37,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizi
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ContentAssistCustomizingTestLanguageProposalProvider;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
@@ -218,12 +220,12 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertEquals(3, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 		
-		assertEquals(keywords.toString(), 1, keywords.size());
+		assertEquals(1, keywords.size(), keywords.toString());
 	}
 	
 	@Test public void testEmptyModel_02() throws Exception {
@@ -239,12 +241,12 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertEquals(3, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 		
-		assertEquals(keywords.toString(), 1, keywords.size());
+		assertEquals(1, keywords.size(), keywords.toString());
 	}
 	
 	@Test public void testFirstEntityName_01() throws Exception {
@@ -260,11 +262,11 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 3, keywords.size());
+		assertEquals(3, keywords.size(), keywords.toString());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		
-		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertEquals(3, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
@@ -283,11 +285,11 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 3, keywords.size());
+		assertEquals(3, keywords.size(), keywords.toString());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		
-		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertEquals(3, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
@@ -304,7 +306,7 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 2, keywords.size());
+		assertEquals(2, keywords.size(), keywords.toString());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		
@@ -323,11 +325,11 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_Name);
 		assertEquals(0, complete_FQN);
 		
-		assertEquals(keywords.toString(), 2, keywords.size());
+		assertEquals(2, keywords.size(), keywords.toString());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		
-		assertEquals(parserRules.toString(), 1, parserRules.size());
+		assertEquals(1, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRefRule()));
 	}
 	
@@ -370,12 +372,12 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(0, completeType_SuperType);
 		assertEquals(0, completeTypeRef_Type);
 		
-		assertEquals(keywords.toString(), 3, keywords.size());
+		assertEquals(3, keywords.size(), keywords.toString());
 		assertTrue(keywords.contains(";"));
 		assertTrue(keywords.contains("extends"));
 		assertTrue(keywords.contains("FQN"));
 		
-		assertEquals(parserRules.toString(), 2, parserRules.size());
+		assertEquals(2, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
@@ -396,7 +398,7 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		assertEquals(1, keywords.size());
 		assertTrue(keywords.contains("FQN"));
 		
-		assertEquals(parserRules.toString(), 2, parserRules.size());
+		assertEquals(2, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
@@ -416,7 +418,7 @@ public class ContentAssistCustomizingTest extends AbstractXtextTests implements 
 		
 		assertEquals(1, keywords.size());
 		
-		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertEquals(3, parserRules.size(), parserRules.toString());
 		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
 		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));

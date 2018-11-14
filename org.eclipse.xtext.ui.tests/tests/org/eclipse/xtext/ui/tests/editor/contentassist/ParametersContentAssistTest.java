@@ -8,14 +8,14 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.ParametersTestLanguageUiInjectorProvider;
-import org.junit.runner.RunWith;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 @InjectWith(ParametersTestLanguageUiInjectorProvider.class)
 public class ParametersContentAssistTest extends AbstractParametersContentAssistTest {
 

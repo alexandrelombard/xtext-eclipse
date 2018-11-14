@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
 import org.eclipse.jface.text.IDocument;
@@ -14,15 +16,14 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.TokenScanner;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class TokenScannerTest extends Assert {
+public class TokenScannerTest {
 
 	@Test public void testFullRange() throws Exception {
 		TokenScanner scanner = getTokenScanner(3, 4, 3, 2);

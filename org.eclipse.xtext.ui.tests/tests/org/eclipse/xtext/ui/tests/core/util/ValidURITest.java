@@ -8,30 +8,30 @@
 package org.eclipse.xtext.ui.tests.core.util;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.EcoreUtil2;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ValidURITest extends Assert {
+public class ValidURITest {
 
 	private static final String FILE_PATH = "/test/test.txt";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		createFile(FILE_PATH, "foo bar");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cleanWorkspace();
 	}

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing;
 
+import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.lang.reflect.Field;
 

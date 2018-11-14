@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.util.Strings;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

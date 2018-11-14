@@ -29,7 +29,8 @@ Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.ecore.editor,
  org.eclipse.xtext.tests,
  org.eclipse.xtext.testing,
- org.eclipse.xtext.ui.testing
+ org.eclipse.xtext.ui.testing,
+ org.junit.jupiter.api;bundle-version="5.1.0"
 Import-Package: org.apache.log4j;version="1.2.15",
  org.hamcrest.core,
  org.junit;version="4.12.0",

@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix
 
-import org.junit.Test
 import org.eclipse.core.resources.IMarker
+import org.junit.jupiter.api.Test
+
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

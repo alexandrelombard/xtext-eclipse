@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.findrefs;
 
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.util.Queue;
@@ -18,7 +19,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.findReferences.TargetURIConverter;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -27,12 +29,11 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
-import org.eclipse.xtext.findReferences.TargetURIConverter;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

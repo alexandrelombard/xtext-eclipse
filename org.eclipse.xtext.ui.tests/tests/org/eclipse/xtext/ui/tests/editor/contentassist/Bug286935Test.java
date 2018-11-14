@@ -8,17 +8,17 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.Bug286935TestLanguageUiInjectorProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @InjectWith(Bug286935TestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 public class Bug286935Test extends AbstractContentAssistTest {
 	
 	@Test public void testBug286935_01() throws Exception {

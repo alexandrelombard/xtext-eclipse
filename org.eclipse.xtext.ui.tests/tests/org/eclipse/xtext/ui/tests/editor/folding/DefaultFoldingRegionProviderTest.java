@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.folding;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collection;
 
@@ -21,7 +22,7 @@ import org.eclipse.xtext.ui.editor.folding.FoldedPosition;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.tests.folding.Element;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Iterables;
 

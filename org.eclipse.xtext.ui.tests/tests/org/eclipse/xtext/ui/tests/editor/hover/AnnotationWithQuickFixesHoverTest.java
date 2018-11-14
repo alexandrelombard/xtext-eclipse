@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.hover;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -29,7 +31,7 @@ import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API

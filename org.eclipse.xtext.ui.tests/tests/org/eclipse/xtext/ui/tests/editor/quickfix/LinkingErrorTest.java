@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -21,7 +23,7 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main;
 import org.eclipse.xtext.ui.tests.quickfix.ui.quickfix.QuickfixCrossrefTestLanguageQuickfixProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Heiko Behrens - Initial contribution and API

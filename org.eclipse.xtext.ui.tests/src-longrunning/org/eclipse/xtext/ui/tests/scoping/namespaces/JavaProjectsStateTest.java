@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
@@ -14,8 +16,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.containers.JavaProjectsStateHelper;
@@ -24,7 +24,9 @@ import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.shared.JdtHelper;
-import org.junit.Test;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -106,7 +108,7 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 	
 	@Test public void testGetContainedURIs_02() {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 4, containedURIs.size());
+		assertEquals(4, containedURIs.size(), containedURIs.toString());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(simpleUri1));
 		assertTrue(containedURIs.contains(uri2));
@@ -117,10 +119,10 @@ public class JavaProjectsStateTest extends AbstractJavaProjectsStateTest {
 	
 	@Test public void testGetContainedURIs_03() throws CoreException, InvocationTargetException, InterruptedException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 4, containedURIs.size());
+		assertEquals(4, containedURIs.size(), containedURIs.toString());
 		URI uri = createFileAndRegisterResource(project1, "file3");
 		containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 5, containedURIs.size());
+		assertEquals(5, containedURIs.size(), containedURIs.toString());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(simpleUri1));
 		assertTrue(containedURIs.contains(uri2));

@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
@@ -22,7 +24,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContent
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -77,7 +79,7 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 //		Collection<FollowElement> followList = com.google.common.collect.Lists.newArrayList(getFollowSet(input));
 		assertEquals(expected.size(), followSet.size());
 		Set<AbstractElement> grammarElements = computeSearchElements(followSet);
-		assertEquals(grammarElements.toString(), expected, grammarElements);
+		assertEquals(expected, grammarElements, grammarElements.toString());
 	}
 
 	private Set<AbstractElement> computeSearchElements(Collection<FollowElement> followSet) {

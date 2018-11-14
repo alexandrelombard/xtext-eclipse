@@ -36,9 +36,9 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -57,7 +57,7 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
   
   private StyledText styledText;
   
-  @Before
+  @BeforeEach
   public void setUpEditor() {
     try {
       final IResourceServiceProvider rsp = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(URI.createURI("dummy.testlanguage"));
@@ -85,7 +85,7 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
       NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
       this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_3);
       Thread.sleep(20);
-      Assert.assertTrue(this.events.isEmpty());
+      Assertions.assertTrue(this.events.isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -97,17 +97,17 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
   @Test
   public void testSaveAndEdit() {
     this.pushKey((IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray("a".toCharArray())))).charValue(), 0);
-    Assert.assertEquals(1, this.events.size());
-    Assert.assertEquals("fooa", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
+    Assertions.assertEquals(1, this.events.size());
+    Assertions.assertEquals("fooa", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
     this.editor.doSave(_nullProgressMonitor);
     NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
     this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_1);
-    Assert.assertEquals(2, this.events.size());
-    Assert.assertNull(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew());
+    Assertions.assertEquals(2, this.events.size());
+    Assertions.assertNull(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew());
     this.pushKey(((char) 0), SWT.BS);
-    Assert.assertEquals(3, this.events.size());
-    Assert.assertEquals("foo", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
+    Assertions.assertEquals(3, this.events.size());
+    Assertions.assertEquals("foo", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
   }
   
   /**
@@ -116,22 +116,22 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
   @Test
   public void testUndoRedo() {
     this.pushKey((IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray("a".toCharArray())))).charValue(), 0);
-    Assert.assertEquals(1, this.events.size());
-    Assert.assertEquals("fooa", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
+    Assertions.assertEquals(1, this.events.size());
+    Assertions.assertEquals("fooa", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
     ISourceViewer _internalSourceViewer = this.editor.getInternalSourceViewer();
     final IUndoManager undoManager = ((XtextSourceViewer) _internalSourceViewer).getUndoManager();
     undoManager.undo();
     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
     this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor);
     this.syncUtil.waitForReconciler(this.editor);
-    Assert.assertEquals(2, this.events.size());
-    Assert.assertNull(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew());
+    Assertions.assertEquals(2, this.events.size());
+    Assertions.assertNull(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew());
     undoManager.redo();
     NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
     this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_1);
     this.syncUtil.waitForReconciler(this.editor);
-    Assert.assertEquals(3, this.events.size());
-    Assert.assertEquals("fooa", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
+    Assertions.assertEquals(3, this.events.size());
+    Assertions.assertEquals("fooa", IterableExtensions.<String>last(IterableExtensions.<IEObjectDescription>head(IterableExtensions.<IResourceDescription.Delta>head(IterableExtensions.<IResourceDescription.Event>last(this.events).getDeltas()).getNew().getExportedObjects()).getQualifiedName().getSegments()));
   }
   
   protected void pushKey(final char c, final int k) {
@@ -169,7 +169,7 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
           this.syncUtil.yieldToQueuedDisplayJobs(_nullProgressMonitor_1);
         }
       }
-      Assert.fail("Document didn\'t change on keystroke");
+      Assertions.<Object>fail("Document didn\'t change on keystroke");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

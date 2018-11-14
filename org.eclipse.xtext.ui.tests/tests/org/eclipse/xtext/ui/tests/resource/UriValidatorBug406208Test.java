@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.resource;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
@@ -18,8 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -30,7 +31,7 @@ public class UriValidatorBug406208Test implements IStorage, IResourceServiceProv
 	public void testExtensionIsEncoded() throws Exception {
 		UriValidator validator = new UriValidator();
 		new ReflectExtensions().set(validator, "registry", this);
-		Assert.assertTrue(validator.isPossiblyManaged(this));
+		assertTrue(validator.isPossiblyManaged(this));
 	}
 	
 	@Override

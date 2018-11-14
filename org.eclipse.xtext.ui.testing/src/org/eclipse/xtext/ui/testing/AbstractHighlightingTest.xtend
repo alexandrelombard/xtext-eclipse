@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 
+import static org.junit.jupiter.api.Assertions.*;
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.addNature
 
 /**
@@ -128,7 +129,7 @@ abstract class AbstractHighlightingTest extends AbstractEditorTest {
 
 		val content = styledText.text
 		val offset = content.indexOf(text)
-		assertNotEquals('''Cannot locate '«text»' in «content»''', -1, offset)
+		assertNotEquals( -1, offset, '''Cannot locate '«text»' in «content»''')
 		
 		for (var i = 0; i < text.length; i++) {
 			val currentPosition = offset + i
@@ -151,20 +152,17 @@ abstract class AbstractHighlightingTest extends AbstractEditorTest {
 
 	protected def assertFontStyle(StyleRange it, String character, int expected) {
 		val actual = fontStyle
-		assertEquals('''Expected font style does not correspond to the actual font style on character «character»''',
-			expected, actual)
+		assertEquals(expected, actual, '''Expected font style does not correspond to the actual font style on character «character»''')
 	}
 
 	protected def assertForegroundColor(StyleRange it, String character, Color expected) {
 		val actual = foreground ?: new Color(null, 0, 0, 0) // the default foreground color is black 
-		assertEquals('''Expected foreground color does not correspond to the actual foreground color on character «character»''',
-			expected, actual)
+		assertEquals(expected, actual, '''Expected foreground color does not correspond to the actual foreground color on character «character»''')
 	}
 
 	protected def assertBackgroundColor(StyleRange it, String character, Color expected) {
 		val actual = background ?: new Color(null, 255, 255, 255) // the default background color is white 
-		assertEquals('''Expected background color does not correspond to the actual background color on character «character»''',
-			expected, actual)
+		assertEquals(expected, actual, '''Expected background color does not correspond to the actual background color on character «character»''')
 	}
 
 }

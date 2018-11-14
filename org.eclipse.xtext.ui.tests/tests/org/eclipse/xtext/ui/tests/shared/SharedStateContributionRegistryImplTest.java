@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.shared;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.shared.contribution.SharedStateContribution;
 import org.eclipse.xtext.ui.shared.internal.SharedStateContributionRegistryImpl;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -28,7 +29,7 @@ public class SharedStateContributionRegistryImplTest {
 
 	private Injector injector;
 
-	@Before
+	@BeforeEach
 	public void createParentInjector() {
 		injector = Guice.createInjector(new Module() {
 			@Override
@@ -48,17 +49,17 @@ public class SharedStateContributionRegistryImplTest {
 				binder.bind(CharSequenceClient.class).to(CharSequenceClientImpl.class);
 			}
 		});
-		Assert.assertEquals("fromParentInjector", myInjector.getInstance(CharSequenceClient.class).getSeq());
+		assertEquals("fromParentInjector", myInjector.getInstance(CharSequenceClient.class).getSeq());
 		
-		Assert.assertNotNull(myInjector.getExistingBinding(Key.get(CharSequenceClientImpl.class)));
-		Assert.assertNotNull(myInjector.getExistingBinding(Key.get(CharSequenceClient.class)));
-		Assert.assertNotNull(myInjector.getExistingBinding(Key.get(CharSequence.class)));
-		Assert.assertNotNull(myInjector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(myInjector.getExistingBinding(Key.get(CharSequenceClientImpl.class)));
+		assertNotNull(myInjector.getExistingBinding(Key.get(CharSequenceClient.class)));
+		assertNotNull(myInjector.getExistingBinding(Key.get(CharSequence.class)));
+		assertNotNull(myInjector.getExistingBinding(Key.get(String.class)));
 		
-		Assert.assertNull(injector.getExistingBinding(Key.get(CharSequenceClientImpl.class)));
-		Assert.assertNull(injector.getExistingBinding(Key.get(CharSequenceClient.class)));
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(CharSequence.class)));
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNull(injector.getExistingBinding(Key.get(CharSequenceClientImpl.class)));
+		assertNull(injector.getExistingBinding(Key.get(CharSequenceClient.class)));
+		assertNotNull(injector.getExistingBinding(Key.get(CharSequence.class)));
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
 	}
 	
 	@Test
@@ -70,9 +71,9 @@ public class SharedStateContributionRegistryImplTest {
 				binder.bind(CharSequenceClient.class).to(CharSequenceClientImpl.class);
 			}
 		});
-		Assert.assertTrue(contribution.isContributionSupported(CharSequenceClient.class));
-		Assert.assertFalse(contribution.isContributionSupported(IXtextDocument.class));
-		Assert.assertEquals("fromParentInjector", contribution.getContribution(CharSequenceClient.class).getSeq());
+		assertTrue(contribution.isContributionSupported(CharSequenceClient.class));
+		assertFalse(contribution.isContributionSupported(IXtextDocument.class));
+		assertEquals("fromParentInjector", contribution.getContribution(CharSequenceClient.class).getSeq());
 	}
 	
 	interface CharSequenceClient {

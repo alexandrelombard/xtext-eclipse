@@ -13,17 +13,17 @@ import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ui.testing.util.LineDelimiters;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -35,7 +35,7 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
   
   private final HashSet<Object> expectedRegions = CollectionLiterals.<Object>newHashSet();
   
-  @Before
+  @BeforeEach
   public void setup() {
     try {
       this.with(NoJdtTestLanguageStandaloneSetup.class);
@@ -89,14 +89,15 @@ public class TaskHighlightingTest extends AbstractXtextTests implements IHighlig
   
   @Override
   public void addPosition(final int offset, final int length, final String... id) {
-    Assert.assertEquals(1, id.length);
+    Assertions.assertEquals(1, id.length);
     String _get = id[0];
     final TypedRegion region = new TypedRegion(offset, length, _get);
-    Assert.assertFalse(region.toString(), this.expectedRegions.isEmpty());
+    Assertions.assertFalse(this.expectedRegions.isEmpty(), region.toString());
+    boolean _remove = this.expectedRegions.remove(region);
     String _string = this.expectedRegions.toString();
     String _plus = ("expected: " + _string);
     String _plus_1 = (_plus + " but was: ");
     String _plus_2 = (_plus_1 + region);
-    Assert.assertTrue(_plus_2, this.expectedRegions.remove(region));
+    Assertions.assertTrue(_remove, _plus_2);
   }
 }

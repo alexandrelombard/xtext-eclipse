@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;

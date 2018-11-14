@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -18,12 +20,12 @@ import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 import org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Element;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestPackage;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Injector;
 

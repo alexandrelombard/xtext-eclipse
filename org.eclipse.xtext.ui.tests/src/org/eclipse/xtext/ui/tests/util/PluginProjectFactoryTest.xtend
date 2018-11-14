@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.util
 
-import org.junit.Test
-import static org.junit.Assert.*
+import org.junit.jupiter.api.Test
+import static org.junit.jupiter.api.Assertions.*
 import org.eclipse.xtext.ui.util.PluginProjectFactory
 import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toPlatform
 

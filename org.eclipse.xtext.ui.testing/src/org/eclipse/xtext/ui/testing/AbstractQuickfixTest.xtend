@@ -37,6 +37,8 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import static extension org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.addNature
 
 /**
@@ -123,12 +125,12 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		val issue = document.getValidationIssue(issueCode)
 
 		val actualIssueResolutions = issue.getResolutions
-		assertEquals("The number of quickfixes does not match!", expected.size, actualIssueResolutions.size)
+		assertEquals(expected.size, actualIssueResolutions.size, "The number of quickfixes does not match!")
 		for (i : 0..< actualIssueResolutions.size) {
 			val actualIssueResolution = actualIssueResolutions.get(i)
 			val expectedIssueResolution = expected.get(i)
-			expectedIssueResolution.label.assertEquals(actualIssueResolution.label)
-			expectedIssueResolution.description.assertEquals(actualIssueResolution.description)
+			assertEquals(expectedIssueResolution.label, actualIssueResolution.label)
+			assertEquals(expectedIssueResolution.description, actualIssueResolution.description)
 			expectedIssueResolution.result.assertIssueResolutionResult(actualIssueResolution, originalText)
 		}
 	}
@@ -139,7 +141,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 		]
 
 		val issueCandidates = issues.filter[code == issueCode]
-		assertEquals("There should be one '" + issueCode + "' validation issue!", 1, issueCandidates.size)
+		assertEquals(1, issueCandidates.size, "There should be one '" + issueCode + "' validation issue!")
 		issueCandidates.head
 	}
 
@@ -155,7 +157,7 @@ abstract class AbstractQuickfixTest extends AbstractEditorTest {
 			actualIssueResolution.image, modificationContext, actualIssueResolution.modification,
 			actualIssueResolution.relevance).apply
 		val actualResult = document.get
-		expectedResult.assertEquals(actualResult)
+		assertEquals(expectedResult, actualResult)
 	}
 
 	private static class TestModificationContext implements IModificationContext {

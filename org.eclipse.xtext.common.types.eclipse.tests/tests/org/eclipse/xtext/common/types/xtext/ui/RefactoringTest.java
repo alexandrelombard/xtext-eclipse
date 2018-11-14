@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;

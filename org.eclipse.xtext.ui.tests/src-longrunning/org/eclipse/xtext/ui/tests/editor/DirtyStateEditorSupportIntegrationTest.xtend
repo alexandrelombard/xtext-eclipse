@@ -22,10 +22,11 @@ import org.eclipse.xtext.ui.editor.XtextEditor
 import org.eclipse.xtext.ui.editor.XtextSourceViewer
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.ui.testing.AbstractEditorTest
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -42,7 +43,7 @@ class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
 	
 	StyledText styledText
 	
-	@Before
+	@BeforeEach
 	def void setUpEditor() {
 		val rsp = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(URI.createURI('dummy.testlanguage'))
 		rsp.get(Injector).injectMembers(this)

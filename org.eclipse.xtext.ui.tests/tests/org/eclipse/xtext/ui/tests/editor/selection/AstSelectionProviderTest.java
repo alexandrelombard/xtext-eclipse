@@ -7,16 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.selection;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Stack;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.selection.AstSelectionProvider;
 import org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

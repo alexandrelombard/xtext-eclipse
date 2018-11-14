@@ -9,8 +9,8 @@ package org.eclipse.xtext.ui.tests.editor.model.edit;
 
 import org.eclipse.xtext.ui.editor.model.edit.ChangeSerializerTextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -24,20 +24,20 @@ public class ChangeSerializerComposerTest extends AbstractTextEditComposerTest {
 
 	@Override
 	@Test
-	@Ignore
+	@Disabled
 	public void testRemoveRootObject() throws Exception {
 		super.testRemoveRootObject();
 	}
 
 	@Override
 	@Test
-	@Ignore
+	@Disabled
 	public void testReplaceRootObject() throws Exception {
 		super.testReplaceRootObject();
 	}
 
 	@Override
-	@Ignore
+	@Disabled
 	@Test
 	public void testObjectReplacement() throws Exception {
 		// doesn't work because of xtext.xtext still uses old formatter.

@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 /**

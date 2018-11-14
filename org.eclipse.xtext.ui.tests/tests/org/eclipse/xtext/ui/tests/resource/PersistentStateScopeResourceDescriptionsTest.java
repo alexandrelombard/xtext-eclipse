@@ -13,7 +13,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 

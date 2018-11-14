@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collection;
 
@@ -18,7 +19,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.AbstractJavaProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -27,7 +27,8 @@ import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
 import org.eclipse.xtext.ui.shared.JdtHelper;
-import org.junit.Test;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

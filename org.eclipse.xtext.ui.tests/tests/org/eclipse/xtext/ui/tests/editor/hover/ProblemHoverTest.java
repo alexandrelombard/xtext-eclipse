@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.hover;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,7 +39,7 @@ import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API
@@ -86,7 +88,7 @@ public class ProblemHoverTest extends AbstractEditorTest {
 	@SuppressWarnings("deprecation")
 	@Test public void testAnnotations () {	
 		assertNull(hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(34, 1)));
-		assertEquals("Couldn't resolve reference to Stuff '_mystuff'.", hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(35, 7)));
+		assertEquals(hover.getHoverInfo(editor.getInternalSourceViewer(), new Region(35, 7)), "Couldn't resolve reference to Stuff '_mystuff'.");
 		
 		//The order of annotations in the annotation model is not stable
 		final String hoverInfo = hover.getHoverInfo(editor.getInternalSourceViewer(), 1);

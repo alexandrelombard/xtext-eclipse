@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import static com.google.common.collect.Iterables.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,7 @@ import org.eclipse.jface.text.source.TextInvocationContext;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.base.Predicate;
 

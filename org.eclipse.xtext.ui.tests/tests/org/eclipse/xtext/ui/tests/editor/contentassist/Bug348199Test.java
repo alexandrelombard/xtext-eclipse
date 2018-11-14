@@ -8,19 +8,19 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.Bug348199TestLanguageUiInjectorProvider;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @InjectWith(Bug348199TestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 public class Bug348199Test extends AbstractContentAssistTest {
 	
 	@Test public void testEmptyDocument() throws Exception {
@@ -78,16 +78,16 @@ public class Bug348199Test extends AbstractContentAssistTest {
 		newBuilder(8).appendNl("july 15").assertText("july", "timeperiod_name", "otherelement", "}");
 	}
 	
-	@Test @Ignore public void testAfterTimePeriod_01() throws Exception {
+	@Test @Disabled public void testAfterTimePeriod_01() throws Exception {
 		newBuilder(1).appendNl("timeperiod_name name").assertText("august", "otherelement", "}");
 	}
-	@Test @Ignore public void testAfterTimePeriod_02() throws Exception {
+	@Test @Disabled public void testAfterTimePeriod_02() throws Exception {
 		newBuilder(2).appendNl("timeperiod_name name").assertText("august", "}");
 	}
-	@Test @Ignore public void testAfterTimePeriod_03() throws Exception {
+	@Test @Disabled public void testAfterTimePeriod_03() throws Exception {
 		newBuilder(3).appendNl("timeperiod_name name").assertText("august", "timeperiod_name", "otherelement", "}");
 	}
-	@Test @Ignore public void testAfterTimePeriod_04() throws Exception {
+	@Test @Disabled public void testAfterTimePeriod_04() throws Exception {
 		newBuilder(4).appendNl("timeperiod_name name").assertText("august", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterTimePeriod_05() throws Exception {
@@ -103,16 +103,16 @@ public class Bug348199Test extends AbstractContentAssistTest {
 		newBuilder(8).appendNl("timeperiod_name name").assertText("august", "timeperiod_name", "otherelement", "}");
 	}
 	
-	@Test @Ignore public void testAfterOtherElement_01() throws Exception {
+	@Test @Disabled public void testAfterOtherElement_01() throws Exception {
 		newBuilder(1).appendNl("otherelement alias").assertText("september", "timeperiod_name");
 	}
-	@Test @Ignore public void testAfterOtherElement_02() throws Exception {
+	@Test @Disabled public void testAfterOtherElement_02() throws Exception {
 		newBuilder(2).appendNl("otherelement alias").assertText("september", "}");
 	}
-	@Test @Ignore public void testAfterOtherElement_03() throws Exception {
+	@Test @Disabled public void testAfterOtherElement_03() throws Exception {
 		newBuilder(3).appendNl("otherelement alias").assertText("september", "timeperiod_name", "otherelement", "}");
 	}
-	@Test @Ignore public void testAfterOtherElement_04() throws Exception {
+	@Test @Disabled public void testAfterOtherElement_04() throws Exception {
 		newBuilder(4).appendNl("otherelement alias").assertText("september", "timeperiod_name", "otherelement", "}");
 	}
 	@Test public void testAfterOtherElement_05() throws Exception {

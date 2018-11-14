@@ -18,13 +18,13 @@ import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider
 import org.eclipse.xtext.ui.tests.internal.TestsActivator
 import org.eclipse.xtext.util.StringInputStream
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test
 
 import static org.eclipse.emf.common.util.URI.*
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import static org.junit.Assert.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -36,12 +36,12 @@ class LiveShadowedAllContainerStateTest {
 	@Inject XtextLiveScopeResourceSetProvider liveScopeResourceSetProvider;
 	@Inject extension FileExtensionProvider
 
-	@Before
+	@BeforeEach
 	def setUp() throws Exception {
 		TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
 	}
 
-	@After
+	@AfterEach
 	def tearDown() throws Exception {
 		cleanWorkspace();
 	}

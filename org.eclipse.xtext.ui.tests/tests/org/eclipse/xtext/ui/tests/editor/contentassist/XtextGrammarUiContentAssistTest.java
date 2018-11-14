@@ -8,17 +8,17 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.testlanguages.xtextgrammar.ui.tests.XtextGrammarTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @InjectWith(XtextGrammarTestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 public class XtextGrammarUiContentAssistTest extends AbstractContentAssistTest {
 
 	@Test public void testCompleteRuleCall() throws Exception {

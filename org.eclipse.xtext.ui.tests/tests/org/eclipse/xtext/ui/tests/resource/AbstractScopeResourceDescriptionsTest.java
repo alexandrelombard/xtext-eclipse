@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.resource;
 
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.junit4.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -32,12 +31,13 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
+import org.eclipse.xtext.ui.testing.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.foo.Stuff;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.google.common.base.Throwables;
 import com.google.inject.Inject;
@@ -166,7 +166,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
 		IProject project = createProject("test");
@@ -177,7 +177,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 
 	protected abstract ResourceSet createResourceSet(IProject project);
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cleanWorkspace();
 	}

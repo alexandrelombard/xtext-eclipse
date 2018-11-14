@@ -7,20 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.DefaultLastSegmentFinder;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultLastSegmentFinderTest extends Assert {
+public class DefaultLastSegmentFinderTest {
 
 	private DefaultLastSegmentFinder finder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		finder = new FQNPrefixMatcher.DefaultLastSegmentFinder();
 	}
@@ -32,27 +33,27 @@ public class DefaultLastSegmentFinderTest extends Assert {
 	
 	@Test public void testGetLastSegment_02() {
 		assertEquals(null, finder.getLastSegment("a", '.'));
-		assertEquals("A", finder.getLastSegment("A", '.'));
+		assertEquals(finder.getLastSegment("A", '.'), "A");
 	}
 	
 	@Test public void testGetLastSegment_03() {
 		assertEquals(null, finder.getLastSegment("aA", '.'));
-		assertEquals("AA", finder.getLastSegment("AA", '.'));
-		assertEquals("Aa", finder.getLastSegment("Aa", '.'));
+		assertEquals(finder.getLastSegment("AA", '.'), "AA");
+		assertEquals(finder.getLastSegment("Aa", '.'), "Aa");
 	}
 	
 	@Test public void testGetLastSegment_04() {
-		assertEquals("aA", finder.getLastSegment("prefix.aA", '.'));
-		assertEquals("aa", finder.getLastSegment("prefix.aA.aa", '.'));
-		assertEquals("A", finder.getLastSegment("preFix.A", '.'));
-		assertEquals("AA", finder.getLastSegment("prefix.AA", '.'));
-		assertEquals("Aa", finder.getLastSegment("prefix.Aa", '.'));
+		assertEquals(finder.getLastSegment("prefix.aA", '.'), "aA");
+		assertEquals(finder.getLastSegment("prefix.aA.aa", '.'), "aa");
+		assertEquals(finder.getLastSegment("preFix.A", '.'), "A");
+		assertEquals(finder.getLastSegment("prefix.AA", '.'), "AA");
+		assertEquals(finder.getLastSegment("prefix.Aa", '.'), "Aa");
 	}
 	
 	@Test public void testGetLastSegment_05() {
-		assertEquals("A.a", finder.getLastSegment("prefix.A.a", '.'));
-		assertEquals("A.A", finder.getLastSegment("preFix.A.A", '.'));
-		assertEquals("AA.A", finder.getLastSegment("prefix.AA.A", '.'));
-		assertEquals("Aa.A", finder.getLastSegment("prefix.Aa.A", '.'));
+		assertEquals(finder.getLastSegment("prefix.A.a", '.'), "A.a");
+		assertEquals(finder.getLastSegment("preFix.A.A", '.'), "A.A");
+		assertEquals(finder.getLastSegment("prefix.AA.A", '.'), "AA.A");
+		assertEquals(finder.getLastSegment("prefix.Aa.A", '.'), "Aa.A");
 	}
 }

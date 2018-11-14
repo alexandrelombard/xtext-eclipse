@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.refactoring;
 
 import static com.google.common.collect.Lists.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
@@ -28,7 +29,7 @@ import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 

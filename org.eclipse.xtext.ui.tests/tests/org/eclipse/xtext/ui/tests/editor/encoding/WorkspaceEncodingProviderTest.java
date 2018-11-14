@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.encoding;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -26,8 +27,8 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
 import org.eclipse.xtext.ui.editor.WorkspaceEncodingProvider;
 import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Injector;
 
@@ -47,7 +48,7 @@ public class WorkspaceEncodingProviderTest extends AbstractWorkbenchTest {
 	private IProgressMonitor monitor = new NullProgressMonitor();
 	
 	
-	@Before
+	@BeforeEach
 	public void init () throws Exception {
 		injector = TestlanguagesActivator.getInstance().getInjector(TestlanguagesActivator.ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE);
 		injector.injectMembers(this);

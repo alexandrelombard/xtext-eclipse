@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.ui.tests.ui.contentassist;
 
-import org.eclipse.xtext.ui.tests.ui.contentassist.AbstractFoldingTestLanguageProposalProvider;
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.

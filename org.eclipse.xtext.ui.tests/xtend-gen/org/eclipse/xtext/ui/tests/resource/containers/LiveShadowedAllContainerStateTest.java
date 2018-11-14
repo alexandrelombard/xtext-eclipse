@@ -36,10 +36,10 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -59,12 +59,12 @@ public class LiveShadowedAllContainerStateTest {
   @Extension
   private FileExtensionProvider _fileExtensionProvider;
   
-  @Before
+  @BeforeEach
   public void setUp() throws Exception {
     TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
   }
   
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     IResourcesSetupUtil.cleanWorkspace();
   }
@@ -88,7 +88,7 @@ public class LiveShadowedAllContainerStateTest {
       _builder.append("}");
       _builder.newLine();
       final String expected = _builder.toString();
-      Assert.assertEquals(expected, this.formatContainers(rs));
+      Assertions.assertEquals(expected, this.formatContainers(rs));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -114,7 +114,7 @@ public class LiveShadowedAllContainerStateTest {
       _builder.append("}");
       _builder.newLine();
       final String expected = _builder.toString();
-      Assert.assertEquals(expected, this.formatContainers(rs));
+      Assertions.assertEquals(expected, this.formatContainers(rs));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -132,7 +132,7 @@ public class LiveShadowedAllContainerStateTest {
       _builder.append("}");
       _builder.newLine();
       final String expected = _builder.toString();
-      Assert.assertEquals(expected, this.formatContainers(rs));
+      Assertions.assertEquals(expected, this.formatContainers(rs));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -157,7 +157,7 @@ public class LiveShadowedAllContainerStateTest {
       _builder.append("}");
       _builder.newLine();
       final String expected = _builder.toString();
-      Assert.assertEquals(expected, this.formatContainers(rs));
+      Assertions.assertEquals(expected, this.formatContainers(rs));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -173,7 +173,7 @@ public class LiveShadowedAllContainerStateTest {
       IResourcesSetupUtil.createFile(fileName, "stuff foo");
       IResourcesSetupUtil.waitForBuild();
       final ResourceSet rs = this.liveScopeResourceSetProvider.get(project);
-      Assert.assertNotNull(rs.getResource(URI.createPlatformResourceURI(fileName, true), true));
+      Assertions.assertNotNull(rs.getResource(URI.createPlatformResourceURI(fileName, true), true));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("container MyProject isEmpty=false {");
       _builder.newLine();
@@ -183,7 +183,7 @@ public class LiveShadowedAllContainerStateTest {
       _builder.append("}");
       _builder.newLine();
       final String expected = _builder.toString();
-      Assert.assertEquals(expected, this.formatContainers(rs));
+      Assertions.assertEquals(expected, this.formatContainers(rs));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -216,7 +216,7 @@ public class LiveShadowedAllContainerStateTest {
       _builder.append("}");
       _builder.newLine();
       final String expected = _builder.toString();
-      Assert.assertEquals(expected, this.formatContainers(rs));
+      Assertions.assertEquals(expected, this.formatContainers(rs));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

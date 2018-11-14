@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeoutException;

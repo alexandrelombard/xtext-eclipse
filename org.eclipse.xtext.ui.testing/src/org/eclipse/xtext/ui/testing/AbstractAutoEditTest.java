@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.testing;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -72,7 +73,7 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		int cursor = string.indexOf('|');
 		assertEquals(string.replace("|", ""), editor.getDocument().get());
 		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-		assertEquals("unexpected cursor position:",cursor, selection.getOffset());
+		assertEquals(cursor, selection.getOffset(),"unexpected cursor position:");
 	}
 
 	protected void selectText(XtextEditor editor,int relativeToCurrentOffset,int length) throws Exception {

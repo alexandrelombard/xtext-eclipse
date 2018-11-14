@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.preferences;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -18,14 +20,13 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Binder;
@@ -35,7 +36,7 @@ import com.google.inject.name.Names;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class PreferenceStoreAccessTest extends Assert implements IPreferenceStoreInitializer {
+public class PreferenceStoreAccessTest implements IPreferenceStoreInitializer {
 
 	private static final String LANGUAGE_ID = "org.xtext.MyLanguage";
 	private IPreferenceStoreAccess preferenceStoreAccess;
@@ -45,7 +46,7 @@ public class PreferenceStoreAccessTest extends Assert implements IPreferenceStor
 		access.getWritablePreferenceStore().setDefault("someBoolean", true);
 	}
 	
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		preferenceStoreAccess = Guice.createInjector(new AbstractGenericModule() {
 			@SuppressWarnings("unused")
@@ -56,7 +57,7 @@ public class PreferenceStoreAccessTest extends Assert implements IPreferenceStor
 		}).getInstance(IPreferenceStoreAccess.class);
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		getWritable().setToDefault("someBoolean");
 		getWritable().setToDefault("someInt");
@@ -79,7 +80,7 @@ public class PreferenceStoreAccessTest extends Assert implements IPreferenceStor
 	@SuppressWarnings("deprecation")
 	@Test public void testScope() {
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), "org");
-		assertFalse("partial keys are not supported", scopedPreferenceStore.getBoolean("xtext.MyLanguage.someBoolean"));
+		assertFalse(scopedPreferenceStore.getBoolean("xtext.MyLanguage.someBoolean"), "partial keys are not supported");
 	}
 	
 	@SuppressWarnings("deprecation")

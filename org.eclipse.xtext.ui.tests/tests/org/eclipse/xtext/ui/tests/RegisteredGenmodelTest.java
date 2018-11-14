@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Collections;
 
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -16,30 +18,29 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RegisteredGenmodelTest extends Assert {
+public class RegisteredGenmodelTest {
 
 	private IExtensionRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		registry = Platform.getExtensionRegistry();
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		registry = null;
 	}
 	
-	@Ignore @Test public void testCanResolveGenmodelURIs() {
+	@Disabled @Test public void testCanResolveGenmodelURIs() {
 		String declaringPlugin = "org.eclipse.emf.ecore";
 		String pointId = "generated_package";
 		IExtensionPoint point = registry.getExtensionPoint(declaringPlugin + "." + pointId);

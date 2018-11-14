@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.tests.ContentAssistNoTerminalExtensionTestLanguageUiInjectorProvider;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 /**
  * Test that a language that does not inherite from Terminals and does not define ANY_OTHER completes well for tokens. Tests introduced for
@@ -25,8 +25,8 @@ import org.junit.runner.RunWith;
  * @author Arne Deutsch - Initial contribution and API
  */
 @InjectWith(ContentAssistNoTerminalExtensionTestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
-@Ignore // https://github.com/eclipse/xtext-core/issues/69 is not fixed, hence the tests fail ... enable if a proper bugfix is found
+@ExtendWith(InjectionExtension.class)
+@Disabled // https://github.com/eclipse/xtext-core/issues/69 is not fixed, hence the tests fail ... enable if a proper bugfix is found
 public class ContentAssistNoTerminalExtensionContentAssistTest extends AbstractContentAssistTest {
 
 	@Test

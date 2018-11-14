@@ -33,25 +33,25 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class Storage2UriMapperJavaImplTest extends Assert {
+public class Storage2UriMapperJavaImplTest {
   private Storage2UriMapperJavaImpl storage2UriMapperJava;
   
-  @Before
+  @BeforeEach
   public void setUp() {
     this.storage2UriMapperJava = this.createFreshStorage2UriMapper();
     JavaCore.addElementChangedListener(this.storage2UriMapperJava);
   }
   
-  @After
+  @AfterEach
   public void tearDown() {
     try {
       JavaCore.removeElementChangedListener(this.storage2UriMapperJava);
@@ -87,85 +87,90 @@ public class Storage2UriMapperJavaImplTest extends Assert {
   @Test
   public void testOnClasspathChange() {
     try {
+      int _size = this.getCachedPackageFragmentRootData().size();
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData = this.getCachedPackageFragmentRootData();
       String _plus = ("" + _cachedPackageFragmentRootData);
-      Assert.assertEquals(_plus, 0, this.getCachedPackageFragmentRootData().size());
+      Assertions.assertEquals(0, _size, _plus);
       final IJavaProject project = JavaProjectSetupUtil.createJavaProject("testProject");
       final int sizeBefore = this.getCachedPackageFragmentRootData().size();
-      Assert.assertTrue((sizeBefore > 0));
+      Assertions.assertTrue((sizeBefore > 0));
       final Function1<String, Boolean> _function = (String it) -> {
         return Boolean.valueOf(it.contains("foo.jar"));
       };
-      Assert.assertNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function));
+      Assertions.assertNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function));
       final IFile file = this.createJar(project);
       JavaProjectSetupUtil.addJarToClasspath(project, file);
+      int _size_1 = this.getCachedPackageFragmentRootData().size();
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_1 = this.getCachedPackageFragmentRootData();
       String _plus_1 = ("" + _cachedPackageFragmentRootData_1);
-      Assert.assertEquals(_plus_1, (sizeBefore + 1), this.getCachedPackageFragmentRootData().size());
+      Assertions.assertEquals((sizeBefore + 1), _size_1, _plus_1);
       final Function1<String, Boolean> _function_1 = (String it) -> {
         return Boolean.valueOf(it.contains("foo.jar"));
       };
-      Assert.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_1));
+      Assertions.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_1));
       final Consumer<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_2 = (Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) -> {
-        Assert.assertEquals(it.getKey(), 1, it.getValue().associatedRoots.size());
+        Assertions.assertEquals(1, it.getValue().associatedRoots.size(), it.getKey());
         final String head = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-        Assert.assertTrue(head, head.startsWith("=testProject/"));
+        Assertions.assertTrue(head.startsWith("=testProject/"), head);
       };
       this.getCachedPackageFragmentRootData().entrySet().forEach(_function_2);
       final IJavaProject project2 = JavaProjectSetupUtil.createJavaProject("testProject2");
       JavaProjectSetupUtil.addJarToClasspath(project2, file);
+      int _size_2 = this.getCachedPackageFragmentRootData().size();
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_2 = this.getCachedPackageFragmentRootData();
       String _plus_2 = ("" + _cachedPackageFragmentRootData_2);
-      Assert.assertEquals(_plus_2, (sizeBefore + 1), this.getCachedPackageFragmentRootData().size());
+      Assertions.assertEquals((sizeBefore + 1), _size_2, _plus_2);
       final Function1<String, Boolean> _function_3 = (String it) -> {
         return Boolean.valueOf(it.contains("foo.jar"));
       };
-      Assert.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_3));
+      Assertions.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_3));
       final Consumer<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_4 = (Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) -> {
-        Assert.assertEquals(it.getKey(), 2, it.getValue().associatedRoots.size());
+        Assertions.assertEquals(2, it.getValue().associatedRoots.size(), it.getKey());
         final String head = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-        Assert.assertTrue(head, (head.startsWith("=testProject/") || head.startsWith("=testProject2/")));
+        Assertions.assertTrue((head.startsWith("=testProject/") || head.startsWith("=testProject2/")), head);
         final String head2 = IterableExtensions.<String>head(IterableExtensions.<String>tail(it.getValue().associatedRoots.keySet()));
-        Assert.assertTrue(head2, (head.startsWith("=testProject/") || head.startsWith("=testProject2/")));
+        Assertions.assertTrue((head.startsWith("=testProject/") || head.startsWith("=testProject2/")), head2);
       };
       this.getCachedPackageFragmentRootData().entrySet().forEach(_function_4);
       JavaProjectSetupUtil.removeJarFromClasspath(project, file);
+      int _size_3 = this.getCachedPackageFragmentRootData().size();
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_3 = this.getCachedPackageFragmentRootData();
       String _plus_3 = ("" + _cachedPackageFragmentRootData_3);
-      Assert.assertEquals(_plus_3, (sizeBefore + 1), this.getCachedPackageFragmentRootData().size());
+      Assertions.assertEquals((sizeBefore + 1), _size_3, _plus_3);
       final Function1<String, Boolean> _function_5 = (String it) -> {
         return Boolean.valueOf(it.contains("foo.jar"));
       };
-      Assert.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_5));
+      Assertions.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_5));
       final Consumer<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_6 = (Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) -> {
         boolean _contains = it.getKey().contains("foo.jar");
         if (_contains) {
-          Assert.assertEquals(it.getKey(), 1, it.getValue().associatedRoots.size());
+          Assertions.assertEquals(1, it.getValue().associatedRoots.size(), it.getKey());
           final String head = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-          Assert.assertTrue(head, head.startsWith("=testProject2/"));
+          Assertions.assertTrue(head.startsWith("=testProject2/"), head);
         } else {
-          Assert.assertEquals(it.getKey(), 2, it.getValue().associatedRoots.size());
+          Assertions.assertEquals(2, it.getValue().associatedRoots.size(), it.getKey());
           final String head_1 = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-          Assert.assertTrue(head_1, (head_1.startsWith("=testProject/") || head_1.startsWith("=testProject2/")));
+          Assertions.assertTrue((head_1.startsWith("=testProject/") || head_1.startsWith("=testProject2/")), head_1);
           final String head2 = IterableExtensions.<String>head(IterableExtensions.<String>tail(it.getValue().associatedRoots.keySet()));
-          Assert.assertTrue(head2, (head_1.startsWith("=testProject/") || head_1.startsWith("=testProject2/")));
+          Assertions.assertTrue((head_1.startsWith("=testProject/") || head_1.startsWith("=testProject2/")), head2);
         }
       };
       this.getCachedPackageFragmentRootData().entrySet().forEach(_function_6);
       JavaProjectSetupUtil.removeJarFromClasspath(project2, file);
+      int _size_4 = this.getCachedPackageFragmentRootData().size();
       Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData_4 = this.getCachedPackageFragmentRootData();
       String _plus_4 = ("" + _cachedPackageFragmentRootData_4);
-      Assert.assertEquals(_plus_4, sizeBefore, this.getCachedPackageFragmentRootData().size());
+      Assertions.assertEquals(sizeBefore, _size_4, _plus_4);
       final Function1<String, Boolean> _function_7 = (String it) -> {
         return Boolean.valueOf(it.contains("foo.jar"));
       };
-      Assert.assertNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_7));
+      Assertions.assertNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function_7));
       final Consumer<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_8 = (Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) -> {
-        Assert.assertEquals(it.getKey(), 2, it.getValue().associatedRoots.size());
+        Assertions.assertEquals(2, it.getValue().associatedRoots.size(), it.getKey());
         final String head = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-        Assert.assertTrue(head, (head.startsWith("=testProject/") || head.startsWith("=testProject2/")));
+        Assertions.assertTrue((head.startsWith("=testProject/") || head.startsWith("=testProject2/")), head);
         final String head2 = IterableExtensions.<String>head(IterableExtensions.<String>tail(it.getValue().associatedRoots.keySet()));
-        Assert.assertTrue(head2, (head.startsWith("=testProject/") || head.startsWith("=testProject2/")));
+        Assertions.assertTrue((head.startsWith("=testProject/") || head.startsWith("=testProject2/")), head2);
       };
       this.getCachedPackageFragmentRootData().entrySet().forEach(_function_8);
     } catch (Throwable _e) {
@@ -224,41 +229,44 @@ public class Storage2UriMapperJavaImplTest extends Assert {
   }
   
   public void assertNonProjects() {
+    int _size = this.getCachedPackageFragmentRootData().size();
     Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData = this.getCachedPackageFragmentRootData();
     String _plus = ("" + _cachedPackageFragmentRootData);
-    Assert.assertEquals(_plus, 0, this.getCachedPackageFragmentRootData().size());
+    Assertions.assertEquals(0, _size, _plus);
   }
   
   public void assertFirstProject(final int sizeBefore) {
+    int _size = this.getCachedPackageFragmentRootData().size();
     Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData = this.getCachedPackageFragmentRootData();
     String _plus = ("" + _cachedPackageFragmentRootData);
-    Assert.assertEquals(_plus, (sizeBefore + 1), this.getCachedPackageFragmentRootData().size());
+    Assertions.assertEquals((sizeBefore + 1), _size, _plus);
     final Function1<String, Boolean> _function = (String it) -> {
       return Boolean.valueOf(it.contains("foo.jar"));
     };
-    Assert.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function));
+    Assertions.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function));
     final Consumer<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_1 = (Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) -> {
-      Assert.assertEquals(it.getKey(), 1, it.getValue().associatedRoots.size());
+      Assertions.assertEquals(1, it.getValue().associatedRoots.size(), it.getKey());
       final String head = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-      Assert.assertTrue(head, head.startsWith("=testProject/"));
+      Assertions.assertTrue(head.startsWith("=testProject/"), head);
     };
     this.getCachedPackageFragmentRootData().entrySet().forEach(_function_1);
   }
   
   public void assertBothProjects(final int sizeBefore) {
+    int _size = this.getCachedPackageFragmentRootData().size();
     Map<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> _cachedPackageFragmentRootData = this.getCachedPackageFragmentRootData();
     String _plus = ("" + _cachedPackageFragmentRootData);
-    Assert.assertEquals(_plus, (sizeBefore + 1), this.getCachedPackageFragmentRootData().size());
+    Assertions.assertEquals((sizeBefore + 1), _size, _plus);
     final Function1<String, Boolean> _function = (String it) -> {
       return Boolean.valueOf(it.contains("foo.jar"));
     };
-    Assert.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function));
+    Assertions.assertNotNull(IterableExtensions.<String>findFirst(this.getCachedPackageFragmentRootData().keySet(), _function));
     final Consumer<Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData>> _function_1 = (Map.Entry<String, Storage2UriMapperJavaImpl.PackageFragmentRootData> it) -> {
-      Assert.assertEquals(it.getKey(), 2, it.getValue().associatedRoots.size());
+      Assertions.assertEquals(2, it.getValue().associatedRoots.size(), it.getKey());
       final String head = IterableExtensions.<String>head(it.getValue().associatedRoots.keySet());
-      Assert.assertTrue(head, (head.startsWith("=testProject/") || head.startsWith("=testProject2/")));
+      Assertions.assertTrue((head.startsWith("=testProject/") || head.startsWith("=testProject2/")), head);
       final String head2 = IterableExtensions.<String>last(it.getValue().associatedRoots.keySet());
-      Assert.assertTrue(head2, (head.startsWith("=testProject/") || head.startsWith("=testProject2/")));
+      Assertions.assertTrue((head.startsWith("=testProject/") || head.startsWith("=testProject2/")), head2);
     };
     this.getCachedPackageFragmentRootData().entrySet().forEach(_function_1);
   }

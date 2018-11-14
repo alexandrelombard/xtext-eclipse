@@ -12,25 +12,25 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.tests.internal.TestsActivator
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test
 
-import static org.junit.Assert.*
+import static org.junit.jupiter.api.Assertions.*
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
 
 class EclipseWorkspaceConfigurationTest {
 	
 	@Inject EclipseProjectConfigProvider projectConfigProvider 
 	
-	@Before
+	@BeforeEach
 	def void setup() {
 		val injector = TestsActivator.getInstance.getInjector(
 			TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE)
 		injector.injectMembers(this)
 	}
 	
-	@After
+	@AfterEach
 	def void tearDown() {
 		IResourcesSetupUtil.cleanWorkspace
 	}

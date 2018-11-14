@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,13 +17,12 @@ import org.eclipse.jface.text.rules.Token;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PartitionTokenScannerTest extends Assert {
+public class PartitionTokenScannerTest {
 
 	@Test public void testWholePart() throws Exception {
 		PartitionTokenScanner scanner = getPartitionTokenScanner(t(2, 3),t(4,3),t(2,1),t(34,3));

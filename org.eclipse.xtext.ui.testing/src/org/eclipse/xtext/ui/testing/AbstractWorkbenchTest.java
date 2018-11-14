@@ -16,7 +16,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +27,7 @@ import org.junit.jupiter.api.BeforeEach;
  * 
  * @since 2.12
  */
-public abstract class AbstractWorkbenchTest extends Assert {
+public abstract class AbstractWorkbenchTest {
 
 	@Before @BeforeEach
 	public void setUp() throws Exception {

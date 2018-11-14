@@ -7,23 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.testing.util.ResourceLoadHelper;
 import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.DomainModelTestLanguageProposalProvider;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -67,7 +69,7 @@ public class CurrentModelBugTest extends AbstractXtextTests implements ResourceL
 	
 	public void verify(ContentAssistContext contentAssistContext) {
 		EObject currentModel = contentAssistContext.getCurrentModel();
-		assertEquals(currentModel.toString(), expectedClass, currentModel.eClass());
+		assertEquals(expectedClass, currentModel.eClass(), currentModel.toString());
 		if (expectedClassName != null) {
 			assertTrue(contentAssistContext.getCurrentModel() instanceof org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class);
 			assertEquals(expectedClassName, ((org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.Class) contentAssistContext.getCurrentModel()).getName());

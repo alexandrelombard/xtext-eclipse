@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * @since 2.15
@@ -195,7 +195,7 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
     _builder.append(text);
     _builder.append("\' in ");
     _builder.append(content);
-    Assert.assertNotEquals(_builder.toString(), (-1), offset);
+    Assertions.assertNotEquals(Integer.valueOf((-1)), Integer.valueOf(offset), _builder.toString());
     for (int i = 0; (i < text.length()); i++) {
       {
         final int currentPosition = (offset + i);
@@ -224,7 +224,7 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected font style does not correspond to the actual font style on character ");
     _builder.append(character);
-    Assert.assertEquals(_builder.toString(), expected, actual);
+    Assertions.assertEquals(expected, actual, _builder.toString());
   }
   
   protected void assertForegroundColor(final StyleRange it, final String character, final Color expected) {
@@ -239,7 +239,7 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected foreground color does not correspond to the actual foreground color on character ");
     _builder.append(character);
-    Assert.assertEquals(_builder.toString(), expected, actual);
+    Assertions.assertEquals(expected, actual, _builder.toString());
   }
   
   protected void assertBackgroundColor(final StyleRange it, final String character, final Color expected) {
@@ -254,6 +254,6 @@ public abstract class AbstractHighlightingTest extends AbstractEditorTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected background color does not correspond to the actual background color on character ");
     _builder.append(character);
-    Assert.assertEquals(_builder.toString(), expected, actual);
+    Assertions.assertEquals(expected, actual, _builder.toString());
   }
 }

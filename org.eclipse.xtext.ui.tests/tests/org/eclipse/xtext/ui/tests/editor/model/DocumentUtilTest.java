@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.model.DocumentUtil;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 

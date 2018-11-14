@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.hover.html;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.net.URISyntaxException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,7 +29,7 @@ import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API

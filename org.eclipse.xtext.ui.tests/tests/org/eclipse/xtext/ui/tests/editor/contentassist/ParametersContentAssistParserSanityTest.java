@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
@@ -25,12 +27,8 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
 import org.eclipse.xtext.xtext.RuleFilter;
 import org.eclipse.xtext.xtext.RuleNames;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -39,19 +37,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Parameterized.class)
 public class ParametersContentAssistParserSanityTest {
-	/**
-	 * The name of the method that need to be present in the InternalN4JSParser class.
-	 */
-	@Parameter(0)
-	public String methodName;
-
-	/**
-	 * All rules that are supposed to be present in the generated parser class
-	 */
-	@Parameter(1)
-	public Set<String> flattenedRuleNames;
 
 	private static class DummyParser extends TwoParametersTestLanguageParser {
 		@Override
@@ -63,8 +49,7 @@ public class ParametersContentAssistParserSanityTest {
 	/**
 	 * Returns test data.
 	 */
-	@Parameters(name = "{0}")
-	public static Collection<Object[]> methodNames() {
+	public static Stream<Object[]> methodNames() {
 		try {
 			TwoParametersTestLanguageInjectorProvider injectorProvider = new TwoParametersTestLanguageInjectorProvider();
 			try {
@@ -84,7 +69,7 @@ public class ParametersContentAssistParserSanityTest {
 				List<String> methodNames = Lists.newArrayList(nameMappings.values());
 				Collections.sort(methodNames);
 				Set<String> flattenedRuleNames = Sets.newHashSet(Lists.transform(flattenedGrammar.getRules(), r -> r.getName()));
-				return Lists.transform(methodNames, (s) -> new Object[] { s, flattenedRuleNames });
+				return Lists.transform(methodNames, (s) -> new Object[] { s, flattenedRuleNames }).stream();
 			} finally {
 				injectorProvider.restoreRegistry();
 			}
@@ -95,54 +80,57 @@ public class ParametersContentAssistParserSanityTest {
 
 	/**
 	 * Tests if the method is actually present in the parser.
+	 * @param methodName The name of the method that need to be present in the InternalN4JSParser class.
+	 * @param flattenedRuleNames All rules that are supposed to be present in the generated parser class
 	 */
-	@Test
-	public void testMethodExists() throws Exception {
+	@ParameterizedTest
+	@MethodSource("methodNames")
+	public void testMethodExists(String methodName, Set<String> flattenedRuleNames) throws Exception {
 		Class<?> type = InternalTwoParametersTestLanguageParser.class;
 		try {
 			Method method = type.getDeclaredMethod(methodName);
 			// will throw if missing but just to make it more obvious
-			Assert.assertNotNull("method is not null", method);
+			assertNotNull(method, "method is not null");
 		} catch (NoSuchMethodException e) {
 			String withoutPrefix = methodName.substring("rule__".length());
 			String withoutSuffix = withoutPrefix.substring(0, withoutPrefix.indexOf('_'));
 			String flattenedRuleName = "rule" + withoutSuffix;
 			switch (flattenedRuleName) {
 				case "ruleIdOrKeyword":
-					Assert.assertTrue("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.containsAll(Arrays.asList("norm1_IdOrKeyword")));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm2_IdOrKeyword"));
+					assertTrue(flattenedRuleNames.containsAll(Arrays.asList("norm1_IdOrKeyword")),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm2_IdOrKeyword"),
+							"methodName " + methodName + " points to a never called rule");
 					break;
 				case "ruleIdOrKeyword2":
-					Assert.assertTrue("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.containsAll(Arrays.asList("norm2_IdOrKeyword2", "norm7_IdOrKeyword2")));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm1_IdOrKeyword2"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm3_IdOrKeyword2"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm4_IdOrKeyword2"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm5_IdOrKeyword2"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm6_IdOrKeyword2"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm8_IdOrKeyword2"));
+					assertTrue(flattenedRuleNames.containsAll(Arrays.asList("norm2_IdOrKeyword2", "norm7_IdOrKeyword2")),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm1_IdOrKeyword2"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm3_IdOrKeyword2"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm4_IdOrKeyword2"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm5_IdOrKeyword2"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm6_IdOrKeyword2"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm8_IdOrKeyword2"),
+							"methodName " + methodName + " points to a never called rule");
 					break;
 				case "ruleScenario6":
-					Assert.assertTrue("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.containsAll(Arrays.asList("norm3_Scenario6")));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm1_Scenario6"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm2_Scenario6"));
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains("norm4_Scenario6"));
+					assertTrue(flattenedRuleNames.containsAll(Arrays.asList("norm3_Scenario6")),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm1_Scenario6"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm2_Scenario6"),
+							"methodName " + methodName + " points to a never called rule");
+					assertFalse(flattenedRuleNames.contains("norm4_Scenario6"),
+							"methodName " + methodName + " points to a never called rule");
 					break;
 				default:
-					Assert.assertFalse("methodName " + methodName + " points to a never called rule",
-							flattenedRuleNames.contains(flattenedRuleName));
+					assertFalse(flattenedRuleNames.contains(flattenedRuleName),
+							"methodName " + methodName + " points to a never called rule");
 				}
 		}
 	}

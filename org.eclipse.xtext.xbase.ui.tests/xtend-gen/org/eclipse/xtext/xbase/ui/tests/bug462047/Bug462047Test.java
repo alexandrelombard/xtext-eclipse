@@ -30,10 +30,10 @@ import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.ui.tests.Bug462047LangUiInjectorProvider;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 
 /**
@@ -93,7 +93,7 @@ public class Bug462047Test extends AbstractEditorTest {
           final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource res) -> {
             EcoreUtil.resolveAll(res);
             final ResourceSet resourceSet = res.getResourceSet();
-            Assert.assertNull(resourceSet.getResource(URI.createURI("java:/Objects/CORE.CORE"), false));
+            Assertions.assertNull(resourceSet.getResource(URI.createURI("java:/Objects/CORE.CORE"), false));
             return null;
           };
           document.<Object>readOnly(_function_1);

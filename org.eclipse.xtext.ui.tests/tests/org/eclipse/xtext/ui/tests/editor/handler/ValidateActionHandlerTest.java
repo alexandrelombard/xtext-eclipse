@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.tests.editor.handler;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -19,7 +20,7 @@ import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.validation.ValidationJob;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Michael Clay - Initial contribution and API

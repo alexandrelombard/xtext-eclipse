@@ -1,6 +1,8 @@
 
 package org.eclipse.xtext.ui.tests.quickfix.ui.quickfix;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -14,7 +16,6 @@ import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element;
 import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefFactory;
 import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.junit.Assert;
 
 public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfixProvider {
 
@@ -60,7 +61,7 @@ public class QuickfixCrossrefTestLanguageQuickfixProvider extends DefaultQuickfi
 			});
 			for (String s : issue.getData()[0].split(";")) {
 				EObject ele = main.eResource().getEObject(s);
-				Assert.assertTrue(ele instanceof Element);
+				assertTrue(ele instanceof Element);
 				ctx.addModification((Element) ele, e -> {
 					e.setName("goodname");
 				});

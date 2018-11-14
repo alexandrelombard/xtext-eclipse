@@ -26,7 +26,8 @@ Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.ui.testing,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.xtext.testing,
- org.eclipse.xtext.xbase.testing
+ org.eclipse.xtext.xbase.testing,
+ org.junit.jupiter.api;bundle-version="5.1.0"
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",

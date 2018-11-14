@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
@@ -32,19 +34,18 @@ public class Bug379500Test extends AbstractOutlineWorkbenchTest {
 		// Now we focus the editor opened in the super class and hope
 		// the filter action still works here.
 		editor.getEditorSite().getPage().activate(editor);
-		assertEquals("First opened editor doesn't became active", editor, editor.getEditorSite().getPage()
-				.getActiveEditor());
+		assertEquals(editor, editor.getEditorSite().getPage().getActiveEditor(), "First opened editor doesn't became active");
 		treeViewer.expandAll();
 
 		setFiltering(false);
 		// Without filter there should be two items
-		assertEquals("Initially the tree view should contain two items. Check your test setUp.", 2, treeViewer
-				.getTree().getItem(0).getItemCount());
+		assertEquals(2, treeViewer.getTree().getItem(0).getItemCount(),
+				"Initially the tree view should contain two items. Check your test setUp.");
 
 		setFiltering(true);
 		treeViewer.expandAll();
 		// With a working filter there should be only one items
-		assertEquals("Filter action does not work.", 1, treeViewer.getTree().getItem(0).getItemCount());
+		assertEquals(1, treeViewer.getTree().getItem(0).getItemCount(), "Filter action does not work.");
 	}
 
 	protected void setFiltering(boolean isFiltering) {

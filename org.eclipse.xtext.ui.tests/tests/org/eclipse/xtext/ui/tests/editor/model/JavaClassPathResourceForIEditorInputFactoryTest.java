@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.model;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,9 +33,9 @@ import org.eclipse.xtext.ui.testing.AbstractWorkbenchTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Injector;
 
@@ -55,8 +56,8 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 		return TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE);
 	}
 	
-	@Before
-	@After
+	@BeforeEach
+	@AfterEach
 	public void cleanWorkspace() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
@@ -111,8 +112,8 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 		fileInJar.setParent(foo);
 		
 		File jarFile = file.getRawLocation().toFile();
-		assertTrue("exists", jarFile.exists());
-		assertTrue("delete", jarFile.delete());
+		assertTrue(jarFile.exists(), "exists");
+		assertTrue(jarFile.delete(), "delete");
 		
 		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
 		Resource resource = factory.createResource(editorInput);
@@ -124,83 +125,98 @@ public class JavaClassPathResourceForIEditorInputFactoryTest extends AbstractWor
 		}
 	}
 	
-	@Test(expected=CoreException.class) public void testBug463258_03b() throws Throwable {
-		IJavaProject project = createJavaProject("foo");
-		IFile file = project.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "//empty")), true, monitor());
-		
-		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
-		IPackageFragment foo = root.getPackageFragment("foo");
-		JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
-		fileInJar.setParent(foo);
-		
-		File jarFile = file.getLocation().toFile();
-		assertTrue("exists", jarFile.exists());
-		assertTrue("delete", jarFile.delete());
-		
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
-		try {
-			factory.createResource(editorInput);
-		} catch(WrappedException e) {
-			throw e.getCause();
-		}
+	@Test
+	public void testBug463258_03b() throws Throwable {
+		assertThrows(CoreException.class, () -> {
+			IJavaProject project = createJavaProject("foo");
+			IFile file = project.getProject().getFile("foo.jar");
+			file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "//empty")), true, monitor());
+
+			IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {
+			};
+			IPackageFragment foo = root.getPackageFragment("foo");
+			JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
+			fileInJar.setParent(foo);
+
+			File jarFile = file.getLocation().toFile();
+			assertTrue(jarFile.exists(), "exists");
+			assertTrue(jarFile.delete(), "delete");
+
+			XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
+			try {
+				factory.createResource(editorInput);
+			} catch (WrappedException e) {
+				throw e.getCause();
+			}
+		});
 	}
 	
-	@Test(expected=CoreException.class) public void testBug463258_03c() throws Throwable {
-		IJavaProject project = createJavaProject("foo");
-		IFile file = project.getProject().getFile("foo.jar");
-		file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "//empty")), true, monitor());
-		addJarToClasspath(project, file);
-		
-		IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {};
-		IPackageFragment foo = root.getPackageFragment("foo");
-		JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
-		fileInJar.setParent(foo);
-		
-		File jarFile = file.getLocation().toFile();
-		assertTrue("exists", jarFile.exists());
-		assertTrue("delete", jarFile.delete());
-		// simulate an automated refresh
-		file.refreshLocal(IResource.DEPTH_ONE, null);
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
-		try {
-			factory.createResource(editorInput);
-		} catch(WrappedException e) {
-			throw e.getCause();
-		}
+	@Test
+	public void testBug463258_03c() throws Throwable {
+		assertThrows(CoreException.class, () -> {
+			IJavaProject project = createJavaProject("foo");
+			IFile file = project.getProject().getFile("foo.jar");
+			file.create(jarInputStream(new TextFile("foo/bar.testlanguage", "//empty")), true, monitor());
+			addJarToClasspath(project, file);
+
+			IPackageFragmentRoot root = new JarPackageFragmentRoot(file, (JavaProject) project) {
+			};
+			IPackageFragment foo = root.getPackageFragment("foo");
+			JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
+			fileInJar.setParent(foo);
+
+			File jarFile = file.getLocation().toFile();
+			assertTrue(jarFile.exists(), "exists");
+			assertTrue(jarFile.delete(), "delete");
+			// simulate an automated refresh
+			file.refreshLocal(IResource.DEPTH_ONE, null);
+			XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
+			try {
+				factory.createResource(editorInput);
+			} catch (WrappedException e) {
+				throw e.getCause();
+			}
+		});
 	}
 	
-	@Test(expected=CoreException.class) public void testBug463258_04() throws Throwable {
-		IFolder externalFolder = createExternalFolder("externalFolder");
-		IJavaProject project = createJavaProject("foo");
-		
-		addExternalFolderToClasspath(project, externalFolder);
-		
-		IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);
-		IPackageFragment foo = root.getPackageFragment("foo");
-		NonJavaResource fileInFolder = new NonJavaResource(foo, externalFolder.getFile("foo/doesNotExist.testlanguage"));
-		
-		externalFolder.delete(true, null);
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInFolder);
-		try {
-			factory.createResource(editorInput);
-		} catch(WrappedException e) {
-			throw e.getCause();
-		}
+	@Test
+	public void testBug463258_04() throws Throwable {
+		assertThrows(CoreException.class, () -> {
+
+			IFolder externalFolder = createExternalFolder("externalFolder");
+			IJavaProject project = createJavaProject("foo");
+
+			addExternalFolderToClasspath(project, externalFolder);
+
+			IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);
+			IPackageFragment foo = root.getPackageFragment("foo");
+			NonJavaResource fileInFolder = new NonJavaResource(foo, externalFolder.getFile("foo/doesNotExist.testlanguage"));
+
+			externalFolder.delete(true, null);
+			XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInFolder);
+			try {
+				factory.createResource(editorInput);
+			} catch (WrappedException e) {
+				throw e.getCause();
+			}
+		});
 	}
 	
-	@Test(expected=CoreException.class) public void testBug463258_05() throws Throwable {
-		IJavaProject project = createJavaProject("foo");
-		IPackageFragmentRoot root = project.getPackageFragmentRoot("does/not/exist.jar");
-		IPackageFragment foo = root.getPackageFragment("foo");
-		final JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
-		fileInJar.setParent(foo);
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
-		try {
-			factory.createResource(editorInput);
-		} catch(WrappedException e) {
-			throw e.getCause();
-		}
+	@Test
+	public void testBug463258_05() throws Throwable {
+		assertThrows(CoreException.class, () -> {
+			IJavaProject project = createJavaProject("foo");
+			IPackageFragmentRoot root = project.getPackageFragmentRoot("does/not/exist.jar");
+			IPackageFragment foo = root.getPackageFragment("foo");
+			final JarEntryFile fileInJar = new JarEntryFile("bar.testlanguage");
+			fileInJar.setParent(foo);
+			XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(fileInJar);
+			try {
+				factory.createResource(editorInput);
+			} catch (WrappedException e) {
+				throw e.getCause();
+			}
+		});
 	}
 
 }

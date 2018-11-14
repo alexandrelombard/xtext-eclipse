@@ -17,14 +17,13 @@ import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.junit.Assert;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public abstract class AbstractXtextDocumentTest extends Assert {
+public abstract class AbstractXtextDocumentTest {
 	
 	protected OutdatedStateManager outdatedStateManager = new OutdatedStateManager();
 	protected OperationCanceledManager operationCanceledManager = new OperationCanceledManager();

@@ -3,11 +3,12 @@
  */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.ide;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.Modules2;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.

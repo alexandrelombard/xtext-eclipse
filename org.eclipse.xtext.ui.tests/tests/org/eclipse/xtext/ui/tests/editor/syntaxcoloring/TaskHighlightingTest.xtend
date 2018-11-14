@@ -11,14 +11,15 @@ import com.google.inject.Inject
 import org.eclipse.jface.text.TypedRegion
 import org.eclipse.xtext.ide.editor.syntaxcoloring.DefaultSemanticHighlightingCalculator
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageStandaloneSetup
+import org.eclipse.xtext.ui.testing.util.LineDelimiters
+import org.eclipse.xtext.ui.tests.AbstractXtextTests
 import org.eclipse.xtext.util.CancelIndicator
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -30,7 +31,7 @@ class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPos
 	
 	val expectedRegions = newHashSet
 
-	@Before
+	@BeforeEach
 	def void setup() {
 		with(NoJdtTestLanguageStandaloneSetup)
 		injectMembers(this)
@@ -65,8 +66,8 @@ class TaskHighlightingTest extends AbstractXtextTests implements IHighlightedPos
 	override addPosition(int offset, int length, String... id) {
 		assertEquals(1, id.length);
 		val region = new TypedRegion(offset, length, id.get(0));
-		assertFalse(region.toString(), expectedRegions.isEmpty());
-		assertTrue("expected: " + expectedRegions.toString() + " but was: " + region, expectedRegions.remove(region));
+		assertFalse(expectedRegions.isEmpty(), region.toString());
+		assertTrue(expectedRegions.remove(region), "expected: " + expectedRegions.toString() + " but was: " + region);
 	}
 	
 }

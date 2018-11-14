@@ -7,20 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IFilter;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.OutlineTestFactory;
-import org.junit.Test;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;

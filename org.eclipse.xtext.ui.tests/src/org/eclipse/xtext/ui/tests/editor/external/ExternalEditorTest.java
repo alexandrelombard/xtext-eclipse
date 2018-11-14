@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.external;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -22,7 +23,7 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

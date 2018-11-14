@@ -52,7 +52,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * @author miklossy - Initial contribution and API
@@ -255,15 +255,15 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
     final String originalText = document.get();
     final Issue issue = this.getValidationIssue(document, issueCode);
     final List<IssueResolution> actualIssueResolutions = this._issueResolutionProvider.getResolutions(issue);
-    Assert.assertEquals("The number of quickfixes does not match!", ((List<AbstractQuickfixTest.Quickfix>)Conversions.doWrapArray(expected)).size(), actualIssueResolutions.size());
+    Assertions.assertEquals(((List<AbstractQuickfixTest.Quickfix>)Conversions.doWrapArray(expected)).size(), actualIssueResolutions.size(), "The number of quickfixes does not match!");
     int _size = actualIssueResolutions.size();
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
       {
         final IssueResolution actualIssueResolution = actualIssueResolutions.get((i).intValue());
         final AbstractQuickfixTest.Quickfix expectedIssueResolution = expected[(i).intValue()];
-        Assert.assertEquals(expectedIssueResolution.label, actualIssueResolution.getLabel());
-        Assert.assertEquals(expectedIssueResolution.description, actualIssueResolution.getDescription());
+        Assertions.assertEquals(expectedIssueResolution.label, actualIssueResolution.getLabel());
+        Assertions.assertEquals(expectedIssueResolution.description, actualIssueResolution.getDescription());
         this.assertIssueResolutionResult(expectedIssueResolution.result, actualIssueResolution, originalText);
       }
     }
@@ -281,7 +281,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
         return Boolean.valueOf(Objects.equal(_code, issueCode));
       };
       final Iterable<Issue> issueCandidates = IterableExtensions.<Issue>filter(issues, _function_1);
-      Assert.assertEquals((("There should be one \'" + issueCode) + "\' validation issue!"), 1, IterableExtensions.size(issueCandidates));
+      Assertions.assertEquals(1, IterableExtensions.size(issueCandidates), (("There should be one \'" + issueCode) + "\' validation issue!"));
       _xblockexpression = IterableExtensions.<Issue>head(issueCandidates);
     }
     return _xblockexpression;
@@ -298,7 +298,7 @@ public abstract class AbstractQuickfixTest extends AbstractEditorTest {
     int _relevance = actualIssueResolution.getRelevance();
     new IssueResolution(_label, _description, _image, modificationContext, _modification, _relevance).apply();
     final String actualResult = document.get();
-    Assert.assertEquals(expectedResult, actualResult);
+    Assertions.assertEquals(expectedResult, actualResult);
   }
   
   /**

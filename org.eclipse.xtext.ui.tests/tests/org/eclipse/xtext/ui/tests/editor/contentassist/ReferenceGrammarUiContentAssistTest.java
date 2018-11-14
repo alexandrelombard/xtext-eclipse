@@ -7,19 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.ui.testing.AbstractContentAssistTest;
+import org.eclipse.xtext.ui.testing.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.tests.testlanguages.ui.tests.ReferenceGrammarUiTestLanguageUiInjectorProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @InjectWith(ReferenceGrammarUiTestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 public class ReferenceGrammarUiContentAssistTest extends AbstractContentAssistTest {
 	
 	@Test public void testComputePrefix() throws Exception {

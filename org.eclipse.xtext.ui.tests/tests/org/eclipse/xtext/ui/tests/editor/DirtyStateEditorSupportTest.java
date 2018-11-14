@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -45,7 +47,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.notification.StateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 

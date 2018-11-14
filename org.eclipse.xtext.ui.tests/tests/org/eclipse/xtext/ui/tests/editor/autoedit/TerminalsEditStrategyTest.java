@@ -7,19 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractTerminalsEditStrategy;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class TerminalsEditStrategyTest extends Assert {
+public class TerminalsEditStrategyTest {
 	
 	static class TerminalsStrategy extends AbstractTerminalsEditStrategy {
 

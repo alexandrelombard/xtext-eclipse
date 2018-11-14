@@ -3,20 +3,20 @@ package org.eclipse.xtext.ui.tests.core.util;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.testing.util.PluginUtil;
-import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
 
 	private IJavaProject _javaProject;
 	private IClasspathUriResolver _resolver;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		_resolver = new JdtClasspathUriResolver();
 	}

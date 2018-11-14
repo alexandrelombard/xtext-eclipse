@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.label;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider;
-import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -21,9 +23,9 @@ import com.google.inject.Module;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class LabelProviderInjectionTest extends Assert {
+public class LabelProviderInjectionTest {
 
-	@org.junit.Test public void testLabelProviderInjection() throws Exception {
+	@Test public void testLabelProviderInjection() throws Exception {
 		Module module = new Module() {
 			@Override
 			public void configure(Binder binder) {
@@ -31,11 +33,11 @@ public class LabelProviderInjectionTest extends Assert {
 			}
 		};
 		Injector injector = Guice.createInjector(module);
-		Test instance = injector.getInstance(Test.class);
+		TestClass instance = injector.getInstance(TestClass.class);
 		assertTrue(instance.labelProvider instanceof LabelProvider);
 	}
 	
-	static class Test {
+	static class TestClass {
 		@Inject
 		@ResourceServiceDescriptionLabelProvider
 		ILabelProvider labelProvider;

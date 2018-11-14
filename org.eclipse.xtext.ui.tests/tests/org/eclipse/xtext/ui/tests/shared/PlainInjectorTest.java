@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.shared;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Binder;
 import com.google.inject.ConfigurationException;
@@ -25,13 +26,13 @@ public class PlainInjectorTest {
 	@Test
 	public void testEmptyInjector() {
 		Injector injector = Guice.createInjector();
-		Assert.assertNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNull(injector.getExistingBinding(Key.get(String.class)));
 		String emptyString = injector.getInstance(String.class);
-		Assert.assertEquals("", emptyString);
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertEquals("", emptyString);
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
 	}
 	
-	@Test(expected = ConfigurationException.class)
+	@Test
 	public void testEmptyInjectorNoJIT() {
 		Injector injector = Guice.createInjector(new Module() {
 			@Override
@@ -39,19 +40,19 @@ public class PlainInjectorTest {
 				binder.requireExplicitBindings();
 			}
 		});
-		Assert.assertNull(injector.getExistingBinding(Key.get(String.class)));
-		injector.getInstance(String.class);
+		assertNull(injector.getExistingBinding(Key.get(String.class)));
+		assertThrows(ConfigurationException.class, () -> injector.getInstance(String.class));
 	}
 	
 	@Test
 	public void testEmptyChildInjector() {
 		Injector parentInjector = Guice.createInjector();
 		Injector injector = parentInjector.createChildInjector();
-		Assert.assertNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNull(injector.getExistingBinding(Key.get(String.class)));
 		String emptyString = injector.getInstance(String.class);
-		Assert.assertEquals("", emptyString);
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
-		Assert.assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
+		assertEquals("", emptyString);
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
 	}
 	
 	@Test
@@ -63,16 +64,16 @@ public class PlainInjectorTest {
 				binder.bind(CharSequence.class).to(String.class);
 			}
 		});
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(CharSequence.class)));
+		assertNotNull(injector.getExistingBinding(Key.get(CharSequence.class)));
 		// Parent allows JIT bindings and those are always created in the ancestor
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
 		CharSequence emptyString = injector.getInstance(CharSequence.class);
-		Assert.assertEquals("", emptyString);
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
-		Assert.assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
+		assertEquals("", emptyString);
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
 	}
 	
-	@Test(expected = ConfigurationException.class)
+	@Test
 	public void testEmptyChildInjectorNoJIT() {
 		Injector injector = Guice.createInjector().createChildInjector(new Module() {
 			@Override
@@ -80,8 +81,8 @@ public class PlainInjectorTest {
 				binder.requireExplicitBindings();
 			}
 		});
-		Assert.assertNull(injector.getExistingBinding(Key.get(String.class)));
-		injector.getInstance(String.class);
+		assertNull(injector.getExistingBinding(Key.get(String.class)));
+		assertThrows(ConfigurationException.class, () -> injector.getInstance(String.class));
 	}
 	
 	@Test
@@ -94,10 +95,10 @@ public class PlainInjectorTest {
 				binder.bind(CharSequence.class).to(String.class);
 			}
 		});
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
-		Assert.assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
-		Assert.assertEquals("", injector.getInstance(CharSequence.class));
-		Assert.assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
+		assertEquals("", injector.getInstance(CharSequence.class));
+		assertNotNull(parentInjector.getExistingBinding(Key.get(String.class)));
 	}
 	
 	@Test
@@ -114,9 +115,9 @@ public class PlainInjectorTest {
 				binder.bind(CharSequence.class).to(String.class);				
 			}
 		});
-		Assert.assertNotNull(injector.getExistingBinding(Key.get(String.class)));
-		Assert.assertNull(parentInjector.getExistingBinding(Key.get(String.class)));
-		Assert.assertEquals("", injector.getInstance(CharSequence.class));
-		Assert.assertNull(parentInjector.getExistingBinding(Key.get(String.class)));
+		assertNotNull(injector.getExistingBinding(Key.get(String.class)));
+		assertNull(parentInjector.getExistingBinding(Key.get(String.class)));
+		assertEquals("", injector.getInstance(CharSequence.class));
+		assertNull(parentInjector.getExistingBinding(Key.get(String.class)));
 	}
 }

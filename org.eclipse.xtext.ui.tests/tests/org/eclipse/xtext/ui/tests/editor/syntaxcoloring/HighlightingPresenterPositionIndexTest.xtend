@@ -10,10 +10,10 @@ package org.eclipse.xtext.ui.tests.editor.syntaxcoloring
 import java.util.List
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AttributedPosition
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingPresenter
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test
 
-import static org.junit.Assert.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -22,7 +22,7 @@ class HighlightingPresenterPositionIndexTest extends HighlightingPresenter {
 	
 	List<AttributedPosition> positions
 	
-	@Before
+	@BeforeEach
 	def void setUp() {
 		positions = #[
 			new AttributedPosition(0, 2, null, null), 

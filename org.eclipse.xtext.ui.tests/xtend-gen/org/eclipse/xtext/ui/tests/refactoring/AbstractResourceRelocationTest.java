@@ -20,26 +20,26 @@ import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testlanguages.fileAware.ui.tests.FileAwareTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 @InjectWith(FileAwareTestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 @SuppressWarnings("all")
 public abstract class AbstractResourceRelocationTest {
   protected IProject project;
   
-  @Before
+  @BeforeEach
   public void setup() {
     try {
       IResourcesSetupUtil.setAutobuild(false);
@@ -51,7 +51,7 @@ public abstract class AbstractResourceRelocationTest {
     }
   }
   
-  @After
+  @AfterEach
   public void teardown() {
     try {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
@@ -88,7 +88,7 @@ public abstract class AbstractResourceRelocationTest {
     try {
       IResource _findMember = this.project.findMember(filePath);
       final IFile file = ((IFile) _findMember);
-      Assert.assertTrue(file.exists());
+      Assertions.assertTrue(file.exists());
       final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
       final byte[] array = new byte[2048];
       int bytesRead = 0;
@@ -100,7 +100,7 @@ public abstract class AbstractResourceRelocationTest {
       byte[] _byteArray = buffer.toByteArray();
       String _charset = file.getCharset();
       final String text = new String(_byteArray, _charset);
-      Assert.assertEquals(expected, text);
+      Assertions.assertEquals(expected, text);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -114,7 +114,7 @@ public abstract class AbstractResourceRelocationTest {
       final Refactoring refactoring = descriptor.createRefactoring(status);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       refactoring.checkAllConditions(_nullProgressMonitor);
-      Assert.assertTrue(status.isOK());
+      Assertions.assertTrue(status.isOK());
       NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
       final Change change = refactoring.createChange(_nullProgressMonitor_1);
       NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();

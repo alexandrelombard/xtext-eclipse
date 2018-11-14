@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer;
 import org.eclipse.xtext.ui.testing.AbstractDamagerRepairerTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

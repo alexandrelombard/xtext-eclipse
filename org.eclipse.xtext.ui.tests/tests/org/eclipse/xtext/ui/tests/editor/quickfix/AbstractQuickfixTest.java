@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -44,9 +46,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -58,12 +59,12 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 
 	private static boolean WAS_AUTOBUILD;
 
-	@BeforeClass
+	@BeforeAll
 	public static void beforeClass() throws Exception {
 		WAS_AUTOBUILD = IResourcesSetupUtil.setAutobuild(false);
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void afterClass() throws Exception {
 		IResourcesSetupUtil.setAutobuild(WAS_AUTOBUILD);
 	}
@@ -149,14 +150,14 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	protected void assertContentsAndMarkers(IFile file, IMarker[] markers, CharSequence expectation) {
 		String actual = new AnnotatedTextToString().withFile(file).withMarkers(markers).toString().trim();
 		String exp = expectation.toString().trim();
-		Assert.assertEquals(Strings.toUnixLineSeparator(exp), Strings.toUnixLineSeparator(actual));
+		assertEquals(Strings.toUnixLineSeparator(exp), Strings.toUnixLineSeparator(actual));
 	}
 
 	protected void applyQuickfixOnMultipleMarkers(IMarker[] markers) {
 		MarkerResolutionGenerator generator = getInjector().getInstance(MarkerResolutionGenerator.class);
 		IMarker primaryMarker = markers[0];
 		IMarkerResolution[] resolutions = generator.getResolutions(primaryMarker);
-		Assert.assertEquals(1, resolutions.length);
+		assertEquals(1, resolutions.length);
 		assertTrue(resolutions[0] instanceof WorkbenchMarkerResolutionAdapter);
 		WorkbenchMarkerResolutionAdapter resolution = (WorkbenchMarkerResolutionAdapter) resolutions[0];
 		List<IMarker> others = Lists.newArrayList(resolution.findOtherMarkers(markers));
@@ -169,7 +170,7 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	protected void applyQuickfixOnSingleMarkers(IMarker marker) {
 		IMarkerResolutionGenerator2 generator = getInjector().getInstance(MarkerResolutionGenerator.class);
 		IMarkerResolution[] resolutions = generator.getResolutions(marker);
-		Assert.assertEquals(1, resolutions.length);
+		assertEquals(1, resolutions.length);
 		IMarkerResolution resolution = resolutions[0];
 		resolution.run(marker);
 	}

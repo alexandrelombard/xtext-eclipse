@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.autoedit;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
 import org.eclipse.xtext.ui.tests.editor.model.AbstractXtextDocumentTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Hendrik Buender - Initial contribution and API

@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.ltk.core.refactoring.resource.MoveResourcesDescriptor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testlanguages.fileAware.ui.tests.FileAwareTestLanguageUiInjectorProvider;
 import org.eclipse.xtext.ui.tests.refactoring.AbstractResourceRelocationTest;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -23,16 +23,16 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 @InjectWith(FileAwareTestLanguageUiInjectorProvider.class)
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 @SuppressWarnings("all")
 public class ResourceMoveTest extends AbstractResourceRelocationTest {
   @Test
@@ -60,7 +60,7 @@ public class ResourceMoveTest extends AbstractResourceRelocationTest {
     _builder_1.newLine();
     this.file("foo/Y.fileawaretestlanguage", _builder_1);
     this.performMove(this.folder("foo/baz"), x);
-    Assert.assertFalse(x.exists());
+    Assertions.assertFalse(x.exists());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package foo.baz");
     _builder_2.newLine();
@@ -110,7 +110,7 @@ public class ResourceMoveTest extends AbstractResourceRelocationTest {
     _builder_1.newLine();
     final IFile y = this.file("foo/Y.fileawaretestlanguage", _builder_1);
     this.performMove(this.folder("foo/baz"), y);
-    Assert.assertFalse(y.exists());
+    Assertions.assertFalse(y.exists());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package foo.bar");
     _builder_2.newLine();
@@ -160,7 +160,7 @@ public class ResourceMoveTest extends AbstractResourceRelocationTest {
     _builder_1.newLine();
     final IFile y = this.file("foo/Y.fileawaretestlanguage", _builder_1);
     this.performMove(this.folder("foo/baz"), x, y);
-    Assert.assertFalse(y.exists());
+    Assertions.assertFalse(y.exists());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package foo.baz");
     _builder_2.newLine();
@@ -210,7 +210,7 @@ public class ResourceMoveTest extends AbstractResourceRelocationTest {
     _builder_1.newLine();
     this.file("foo/Y.fileawaretestlanguage", _builder_1);
     this.performMove(this.folder("foo/baz"), x.getParent());
-    Assert.assertFalse(x.exists());
+    Assertions.assertFalse(x.exists());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package foo.baz.bar");
     _builder_2.newLine();
@@ -236,7 +236,7 @@ public class ResourceMoveTest extends AbstractResourceRelocationTest {
   }
   
   @Test
-  @Ignore
+  @Disabled
   public void testMoveDirectoryToRoot() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar");
@@ -261,7 +261,7 @@ public class ResourceMoveTest extends AbstractResourceRelocationTest {
     _builder_1.newLine();
     this.file("foo/Y.fileawaretestlanguage", _builder_1);
     this.performMove(this.project, x.getParent());
-    Assert.assertFalse(x.exists());
+    Assertions.assertFalse(x.exists());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("package bar");
     _builder_2.newLine();

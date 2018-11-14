@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.model;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
@@ -19,15 +21,14 @@ import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DocumentPartitionerTest extends Assert {
+public class DocumentPartitionerTest {
 
 	@Test public void testSimple() throws Exception {
 		XtextDocument document = getDocument("/* foo */ bar 345 grammar : so 'baz & so'");

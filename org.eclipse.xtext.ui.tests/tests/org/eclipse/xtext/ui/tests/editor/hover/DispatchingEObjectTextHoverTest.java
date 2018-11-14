@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.hover;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.IRegion;
@@ -22,7 +24,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Christoph Kulla - Initial contribution and API

@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.testing.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Injector;
 

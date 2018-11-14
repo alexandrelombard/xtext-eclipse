@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.scoping.namespaces;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
@@ -15,13 +17,13 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsStateHelper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
-import org.junit.Test;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -102,17 +104,17 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 	
 	@Test public void testGetContainedURIs_01() {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 2, containedURIs.size());
+		assertEquals(2, containedURIs.size(), containedURIs.toString());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(uri2));
 	}
 	
 	@Test public void testGetContainedURIs_02() throws CoreException, InvocationTargetException, InterruptedException {
 		Collection<URI> containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 2, containedURIs.size());
+		assertEquals(2, containedURIs.size(), containedURIs.toString());
 		URI uri = createFileAndRegisterResource(project1, "file3");
 		containedURIs = projectsState.getContainedURIs(project1.getName());
-		assertEquals(containedURIs.toString(), 3, containedURIs.size());
+		assertEquals(3, containedURIs.size(), containedURIs.toString());
 		assertTrue(containedURIs.contains(uri1));
 		assertTrue(containedURIs.contains(uri2));
 		assertTrue(containedURIs.contains(uri));

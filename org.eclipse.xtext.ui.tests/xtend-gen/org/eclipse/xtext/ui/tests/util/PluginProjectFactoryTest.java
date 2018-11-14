@@ -12,8 +12,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ui.testing.util.LineDelimiters;
 import org.eclipse.xtext.ui.tests.util.TestablePluginProjectFactory;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -25,17 +25,17 @@ public class PluginProjectFactoryTest {
     final TestablePluginProjectFactory factory = new TestablePluginProjectFactory();
     StringBuilder content = new StringBuilder();
     factory.addToBuildProperties(content, null, "key");
-    Assert.assertEquals("", content.toString());
+    Assertions.assertEquals("", content.toString());
     StringBuilder _stringBuilder = new StringBuilder();
     content = _stringBuilder;
     factory.addToBuildProperties(content, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()), "key");
-    Assert.assertEquals("", content.toString());
+    Assertions.assertEquals("", content.toString());
     StringBuilder _stringBuilder_1 = new StringBuilder();
     content = _stringBuilder_1;
     factory.addToBuildProperties(content, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("entry1")), "key");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("key = entry1");
-    Assert.assertEquals(_builder.toString(), content.toString());
+    Assertions.assertEquals(_builder.toString(), content.toString());
     StringBuilder _stringBuilder_2 = new StringBuilder();
     content = _stringBuilder_2;
     factory.addToBuildProperties(content, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("entry1", "entry2", "entry3")), "key");
@@ -47,6 +47,6 @@ public class PluginProjectFactoryTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("entry3");
-    Assert.assertEquals(_builder_1.toString(), LineDelimiters.toPlatform(content.toString()));
+    Assertions.assertEquals(_builder_1.toString(), LineDelimiters.toPlatform(content.toString()));
   }
 }

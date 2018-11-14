@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,7 +44,7 @@ public class Bug326948MissingInvocationTest extends AbstractBug326948Test {
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
 		if (keyword == ((BeeLangTestLanguageGrammarAccess) getGrammarAccess()).getInfixExpressionAccess().getLeftSquareBracketKeyword_1_1_1()) {
-			Assert.assertEquals(".", contentAssistContext.getPrefix());
+			assertEquals(".", contentAssistContext.getPrefix());
 			keywordCalled = true;
 		}
 	}

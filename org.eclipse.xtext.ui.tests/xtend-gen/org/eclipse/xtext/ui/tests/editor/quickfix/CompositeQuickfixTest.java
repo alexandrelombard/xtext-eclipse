@@ -20,8 +20,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -150,7 +150,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     final Function1<ICompletionProposal, String> _function = (ICompletionProposal it) -> {
       return it.getDisplayString();
     };
-    Assert.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
+    Assertions.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
     IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals))).apply(editor.getDocument());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("\"not bad doc\"");
@@ -161,7 +161,7 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     _builder_2.newLine();
     _builder_2.append("Bor { }");
     _builder_2.newLine();
-    Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
+    Assertions.assertEquals(_builder_2.toString(), editor.getDocument().get());
   }
   
   @Test
@@ -266,14 +266,14 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     final Function1<ICompletionProposal, String> _function = (ICompletionProposal it) -> {
       return it.getDisplayString();
     };
-    Assert.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
+    Assertions.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
     IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals))).apply(editor.getDocument());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("newElement { } c {\tgoodname { foo {} } }");
     _builder_2.newLine();
     _builder_2.append("a {\tbadname { bar {} } }");
     _builder_2.newLine();
-    Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
+    Assertions.assertEquals(_builder_2.toString(), editor.getDocument().get());
   }
   
   @Test
@@ -291,13 +291,13 @@ public class CompositeQuickfixTest extends AbstractQuickfixTest {
     final Function1<ICompletionProposal, String> _function = (ICompletionProposal it) -> {
       return it.getDisplayString();
     };
-    Assert.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
+    Assertions.assertEquals(_builder_1.toString(), IterableExtensions.join(ListExtensions.<ICompletionProposal, String>map(((List<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function), "\n"));
     IterableExtensions.<ICompletionProposal>head(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals))).apply(editor.getDocument());
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("fixedName {\tref fixable_b }");
     _builder_2.newLine();
     _builder_2.append("fixable_b {\tref fixable_a }");
     _builder_2.newLine();
-    Assert.assertEquals(_builder_2.toString(), editor.getDocument().get());
+    Assertions.assertEquals(_builder_2.toString(), editor.getDocument().get());
   }
 }

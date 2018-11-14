@@ -22,14 +22,14 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class DeclarativeQuickfixProviderTest extends Assert {
+public class DeclarativeQuickfixProviderTest {
   private static final String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode";
   
   private static final String DUMMY_CODE2 = "DeclarativeQuickfixProviderTest.DummyCode2";
@@ -45,8 +45,8 @@ public class DeclarativeQuickfixProviderTest extends Assert {
       public void signature(final Issue i, final IssueResolutionAcceptor acceptor) {
       }
     };
-    Assert.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
-    Assert.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
+    Assertions.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
+    Assertions.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
   }
   
   @Test
@@ -61,9 +61,9 @@ public class DeclarativeQuickfixProviderTest extends Assert {
       public void signature(final Issue i, final IssueResolutionAcceptor acceptor) {
       }
     };
-    Assert.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
-    Assert.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
-    Assert.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE2));
+    Assertions.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
+    Assertions.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
+    Assertions.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE2));
   }
   
   @Test
@@ -77,9 +77,9 @@ public class DeclarativeQuickfixProviderTest extends Assert {
       public void signature(final Issue i, final IssueResolutionAcceptor acceptor) {
       }
     };
-    Assert.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
-    Assert.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
-    Assert.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE2));
+    Assertions.assertFalse(provider.hasResolutionFor((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
+    Assertions.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE));
+    Assertions.assertTrue(provider.hasResolutionFor(DeclarativeQuickfixProviderTest.DUMMY_CODE2));
   }
   
   @Test
@@ -109,19 +109,19 @@ public class DeclarativeQuickfixProviderTest extends Assert {
     };
     provider.setIssueResolutionAcceptorProvider(_function);
     List<IssueResolution> resolutionsIterable = provider.getResolutions(this.createIssue((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
-    Assert.assertNull(IterableExtensions.<IssueResolution>head(resolutionsIterable));
+    Assertions.assertNull(IterableExtensions.<IssueResolution>head(resolutionsIterable));
     List<IssueResolution> resolutions = provider.getResolutions(this.createIssue(DeclarativeQuickfixProviderTest.DUMMY_CODE));
-    Assert.assertEquals(2, resolutions.size());
+    Assertions.assertEquals(2, resolutions.size());
     final Function1<IssueResolution, Boolean> _function_1 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError1"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_1));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_1));
     final Function1<IssueResolution, Boolean> _function_2 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError2"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_2));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_2));
   }
   
   @Test
@@ -159,36 +159,36 @@ public class DeclarativeQuickfixProviderTest extends Assert {
     };
     provider.setIssueResolutionAcceptorProvider(_function);
     List<IssueResolution> resolutionsIterable = provider.getResolutions(this.createIssue((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1))));
-    Assert.assertNull(IterableExtensions.<IssueResolution>head(resolutionsIterable));
+    Assertions.assertNull(IterableExtensions.<IssueResolution>head(resolutionsIterable));
     List<IssueResolution> resolutions = provider.getResolutions(this.createIssue(DeclarativeQuickfixProviderTest.DUMMY_CODE));
-    Assert.assertEquals(3, resolutions.size());
+    Assertions.assertEquals(3, resolutions.size());
     final Function1<IssueResolution, Boolean> _function_1 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError1"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_1));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_1));
     final Function1<IssueResolution, Boolean> _function_2 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError2"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_2));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_2));
     final Function1<IssueResolution, Boolean> _function_3 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError3"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_3));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_3));
     List<IssueResolution> resolutions2 = provider.getResolutions(this.createIssue(DeclarativeQuickfixProviderTest.DUMMY_CODE2));
-    Assert.assertEquals(2, resolutions2.size());
+    Assertions.assertEquals(2, resolutions2.size());
     final Function1<IssueResolution, Boolean> _function_4 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError2"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_4));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_4));
     final Function1<IssueResolution, Boolean> _function_5 = (IssueResolution it) -> {
       String _label = it.getLabel();
       return Boolean.valueOf(Objects.equal(_label, "fixError3"));
     };
-    Assert.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_5));
+    Assertions.assertTrue(IterableExtensions.<IssueResolution>exists(resolutions, _function_5));
   }
   
   protected Issue createIssue(final String code) {

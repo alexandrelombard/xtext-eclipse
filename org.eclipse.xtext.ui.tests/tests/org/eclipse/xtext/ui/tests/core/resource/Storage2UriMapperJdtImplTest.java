@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.core.resource;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.InputStream;
@@ -30,30 +31,25 @@ import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.jdt.internal.core.NonJavaResource;
 import org.eclipse.xtext.testing.Flaky;
 import org.eclipse.xtext.testing.logging.LoggingTester;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.io.ByteStreams;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Storage2UriMapperJdtImplTest extends Assert {
+public class Storage2UriMapperJdtImplTest {
 	
-	@Rule
-	public Flaky.Rule flakyRule = new Flaky.Rule();
-	
-	@Before
-	@After
+	@BeforeEach
+	@AfterEach
 	public void cleanWorkspace() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
@@ -110,8 +106,8 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		fileInJar.setParent(foo);
 		
 		File jarFile = file.getRawLocation().toFile();
-		assertTrue("exists", jarFile.exists());
-		assertTrue("delete", jarFile.delete());
+		assertTrue(jarFile.exists(), "exists");
+		assertTrue(jarFile.delete(), "delete");
 		
 		URI uri = impl.getUri(fileInJar);
 		assertEquals("archive:platform:/resource/foo/foo.jar!/foo/bar.notindexed", uri.toString());
@@ -130,8 +126,8 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		fileInJar.setParent(foo);
 		
 		File jarFile = file.getLocation().toFile();
-		assertTrue("exists", jarFile.exists());
-		assertTrue("delete", jarFile.delete());
+		assertTrue(jarFile.exists(), "exists");
+		assertTrue(jarFile.delete(), "delete");
 		
 		URI uri = impl.getUri(fileInJar);
 		assertNull(uri);
@@ -151,8 +147,8 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		fileInJar.setParent(foo);
 		
 		File jarFile = file.getLocation().toFile();
-		assertTrue("exists", jarFile.exists());
-		assertTrue("delete", jarFile.delete());
+		assertTrue(jarFile.exists(), "exists");
+		assertTrue(jarFile.delete(), "delete");
 		// simulate an automated refresh
 		file.refreshLocal(IResource.DEPTH_ONE, null);
 		URI uri = impl.getUri(fileInJar);
@@ -254,12 +250,12 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		
 		IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);
 		Map<URI, IStorage> rootData = impl.getAllEntries(root);
-		assertEquals(rootData.toString(), 1, rootData.size());
+		assertEquals(1, rootData.size(), rootData.toString());
 		assertEquals("platform:/resource/.org.eclipse.jdt.core.external.folders/externalFolder/a.indexed", rootData.keySet().iterator().next().toString());
 		IFile file3 = externalFolder.getFile("c.indexed");
 		file3.create(new StringInputStream("content"), true, monitor());
 		rootData = impl.getAllEntries(root);
-		assertEquals(rootData.toString(), 2, rootData.size());
+		assertEquals(2, rootData.size(), rootData.toString());
 	}
 	
 	protected Storage2UriMapperJavaImpl getStorage2UriMapper() {

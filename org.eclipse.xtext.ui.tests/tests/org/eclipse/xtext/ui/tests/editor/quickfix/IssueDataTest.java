@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -29,7 +30,7 @@ import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLangua
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 
@@ -69,7 +70,7 @@ public class IssueDataTest extends AbstractQuickfixTest {
 		// filter QuickDiffAnnotations
 		List<Object> allAnnotations = Lists.newArrayList(annotationIterator);
 		List<XtextAnnotation> annotations = newArrayList(filter(allAnnotations, XtextAnnotation.class));
-		assertEquals(annotations.toString(), 1, annotations.size());
+		assertEquals(1, annotations.size(), annotations.toString());
 		XtextAnnotation annotation = annotations.get(0);
 		assertTrue(Arrays.equals(expectedIssueData, annotation.getIssueData()));
 		IssueUtil issueUtil = new IssueUtil();

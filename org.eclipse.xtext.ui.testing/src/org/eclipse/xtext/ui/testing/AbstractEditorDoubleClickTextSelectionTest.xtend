@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import com.google.inject.Inject
 import org.eclipse.jface.text.ITextSelection
 import org.eclipse.swt.SWT
@@ -93,7 +95,7 @@ abstract class AbstractEditorDoubleClickTextSelectionTest extends AbstractEditor
 
 	protected def assertSelectedText(AbstractTextEditor textEditor, CharSequence expectedSelectedText) {
 		val actualSelectedText = (textEditor.selectionProvider.selection as ITextSelection).text
-		expectedSelectedText.assertEquals(actualSelectedText)
+		assertEquals(expectedSelectedText, actualSelectedText)
 	}
 
 	override protected getEditorId() {

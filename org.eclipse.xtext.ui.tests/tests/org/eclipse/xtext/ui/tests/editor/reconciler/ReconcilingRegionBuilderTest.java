@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.reconciler;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.xtext.ui.editor.reconciler.ReconcilerReplaceRegion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

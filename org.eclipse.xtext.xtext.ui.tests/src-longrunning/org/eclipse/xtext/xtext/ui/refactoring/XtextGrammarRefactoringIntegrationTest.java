@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext.ui.refactoring;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 

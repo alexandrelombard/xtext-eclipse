@@ -19,24 +19,24 @@ import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("all")
 public class EclipseWorkspaceConfigurationTest {
   @Inject
   private EclipseProjectConfigProvider projectConfigProvider;
   
-  @Before
+  @BeforeEach
   public void setup() {
     final Injector injector = TestsActivator.getInstance().getInjector(
       TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE);
     injector.injectMembers(this);
   }
   
-  @After
+  @AfterEach
   public void tearDown() {
     try {
       IResourcesSetupUtil.cleanWorkspace();
@@ -53,12 +53,12 @@ public class EclipseWorkspaceConfigurationTest {
       for (final IProject p : _projects) {
         p.delete(true, true, null);
       }
-      Assert.assertEquals(0, wsroot.getProjects().length);
+      Assertions.assertEquals(0, wsroot.getProjects().length);
       final IJavaProject project = JavaProjectSetupUtil.createJavaProject("projectA");
       JavaProjectSetupUtil.createJavaProject("projectB");
       final EclipseProjectConfig projectConfig = this.projectConfigProvider.createProjectConfig(project.getProject());
-      Assert.assertNotNull(projectConfig);
-      Assert.assertNotNull(projectConfig.getWorkspaceConfig().findProjectByName("projectB"));
+      Assertions.assertNotNull(projectConfig);
+      Assertions.assertNotNull(projectConfig.getWorkspaceConfig().findProjectByName("projectB"));
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

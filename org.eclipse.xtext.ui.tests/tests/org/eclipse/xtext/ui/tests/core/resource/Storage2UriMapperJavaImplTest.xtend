@@ -17,34 +17,34 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.jdt.core.IJavaProject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.ui.actions.WorkspaceModifyOperation
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile
 import org.eclipse.xtext.ui.resource.JarEntryLocator
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl.PackageFragmentRootData
 import org.eclipse.xtext.ui.resource.UriValidator
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.TextFile
 import org.eclipse.xtext.ui.util.JavaProjectClasspathChangeAnalyzer
-import org.junit.After
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
-class Storage2UriMapperJavaImplTest extends Assert {
+class Storage2UriMapperJavaImplTest {
 
 	Storage2UriMapperJavaImpl storage2UriMapperJava
 
-	@Before
+	@BeforeEach
 	def void setUp() {
 		this.storage2UriMapperJava = createFreshStorage2UriMapper
 		JavaCore.addElementChangedListener(storage2UriMapperJava)
 	}
 
-	@After
+	@AfterEach
 	def void tearDown() {
 		JavaCore.removeElementChangedListener(storage2UriMapperJava)
 		cleanWorkspace
@@ -69,7 +69,7 @@ class Storage2UriMapperJavaImplTest extends Assert {
 
 	@Test
 	def void testOnClasspathChange() {
-		assertEquals("" + cachedPackageFragmentRootData, 0, cachedPackageFragmentRootData.size)
+		assertEquals(0, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 
 		val project = createJavaProject("testProject")
 		
@@ -81,60 +81,60 @@ class Storage2UriMapperJavaImplTest extends Assert {
 		val file = project.createJar
 		addJarToClasspath(project, file)
 		
-		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
+		assertEquals(sizeBefore + 1, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 1, value.associatedRoots.size)
+			assertEquals(1, value.associatedRoots.size, key)
 			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/'))
+			assertTrue(head.startsWith('=testProject/'), head)
 		]
 
 		val project2 = createJavaProject('testProject2')
 		addJarToClasspath(project2, file)
 		
-		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
+		assertEquals(sizeBefore + 1, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 2, value.associatedRoots.size)
+			assertEquals(2, value.associatedRoots.size, key)
 			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head)
 			val head2 = value.associatedRoots.keySet.tail.head
-			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head2)
 		]
 
 		removeJarFromClasspath(project, file);
 		
-		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
+		assertEquals(sizeBefore + 1, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
 			if (key.contains("foo.jar")) {
-				assertEquals(key, 1, value.associatedRoots.size)
+				assertEquals(1, value.associatedRoots.size, key)
 				val head = value.associatedRoots.keySet.head
-				assertTrue(head, head.startsWith('=testProject2/'))
+				assertTrue(head.startsWith('=testProject2/'), head)
 			} else {
-				assertEquals(key, 2, value.associatedRoots.size)
+				assertEquals(2, value.associatedRoots.size, key)
 				val head = value.associatedRoots.keySet.head
-				assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+				assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head)
 				val head2 = value.associatedRoots.keySet.tail.head
-				assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+				assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head2)
 			}
 		]
 
 		removeJarFromClasspath(project2, file);
 		
 		
-		assertEquals("" + cachedPackageFragmentRootData, sizeBefore, cachedPackageFragmentRootData.size)
+		assertEquals(sizeBefore, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 		assertNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 2, value.associatedRoots.size)
+			assertEquals(2, value.associatedRoots.size, key)
 			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head)
 			val head2 = value.associatedRoots.keySet.tail.head
-			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head2)
 		]
 	}
 
@@ -192,29 +192,29 @@ class Storage2UriMapperJavaImplTest extends Assert {
 	}
 
 	def assertNonProjects() {
-		assertEquals("" + cachedPackageFragmentRootData, 0, cachedPackageFragmentRootData.size)
+		assertEquals(0, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 	}
 
 	def assertFirstProject(int sizeBefore) {
-		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
+		assertEquals(sizeBefore + 1, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 1, value.associatedRoots.size)
+			assertEquals(1, value.associatedRoots.size, key)
 			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/'))
+			assertTrue(head.startsWith('=testProject/'), head)
 		]
 	}
 
 	def assertBothProjects(int sizeBefore) {
-		assertEquals("" + cachedPackageFragmentRootData, sizeBefore + 1, cachedPackageFragmentRootData.size)
+		assertEquals(sizeBefore + 1, cachedPackageFragmentRootData.size, "" + cachedPackageFragmentRootData)
 		assertNotNull(cachedPackageFragmentRootData.keySet.findFirst[contains("foo.jar")])
 
 		cachedPackageFragmentRootData.entrySet.forEach [
-			assertEquals(key, 2, value.associatedRoots.size)
+			assertEquals(2, value.associatedRoots.size, key)
 			val head = value.associatedRoots.keySet.head
-			assertTrue(head, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head)
 			val head2 = value.associatedRoots.keySet.last
-			assertTrue(head2, head.startsWith('=testProject/') || head.startsWith('=testProject2/'))
+			assertTrue(head.startsWith('=testProject/') || head.startsWith('=testProject2/'), head2)
 		]
 	}
 

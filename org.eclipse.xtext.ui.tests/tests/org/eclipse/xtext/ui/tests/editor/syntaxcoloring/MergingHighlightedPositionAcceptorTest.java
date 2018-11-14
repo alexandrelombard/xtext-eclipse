@@ -7,25 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.MergingHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.Strings;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class MergingHighlightedPositionAcceptorTest extends Assert {
+public class MergingHighlightedPositionAcceptorTest {
 
 	protected MergingHighlightedPositionAcceptor acceptor;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		acceptor = createAcceptor();
 	}
@@ -38,7 +39,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		return new MergingHighlightedPositionAcceptor(null);
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		acceptor = null;
 	}
@@ -116,7 +117,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(0, 1, "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 2, positions.size());
+		assertEquals(2, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1", "2");
 		checkPosition(positions.get(1), 1, 1, 0, "1");
 	}
@@ -126,7 +127,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 1, "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2");
 		checkPosition(positions.get(2), 2, 1, 0, "1");
@@ -138,7 +139,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 1, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 2, "1", "2", "3");
 		checkPosition(positions.get(2), 2, 1, 0, "1");
@@ -150,7 +151,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 2, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 2, "1", "2", "3");
 		checkPosition(positions.get(2), 2, 1, 2, "1", "3");
@@ -162,7 +163,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 1, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2", "3");
 		checkPosition(positions.get(2), 2, 1, 1, "1", "2");
@@ -174,7 +175,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 2, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 2, positions.size());
+		assertEquals(2, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 2, 2, "1", "2", "3");
 	}
@@ -185,7 +186,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 1, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 4, positions.size());
+		assertEquals(4, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2", "3");
 		checkPosition(positions.get(2), 2, 1, 1, "1", "2");
@@ -197,7 +198,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 2, "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2");
 		checkPosition(positions.get(2), 2, 1, 1, "2");
@@ -208,7 +209,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(0, 2, "1");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 1, "1");
 		checkPosition(positions.get(1), 1, 1, 0, "2", "1");
 		checkPosition(positions.get(2), 2, 1, 0, "2");
@@ -219,7 +220,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(1, 1, "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 2, positions.size());
+		assertEquals(2, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "2");
 	}
@@ -229,7 +230,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(2, 1, "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 2, positions.size());
+		assertEquals(2, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 2, 1, 1, "2");
 	}
@@ -241,7 +242,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(3, 3, "4");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 6, positions.size());
+		assertEquals(6, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2");
 		checkPosition(positions.get(2), 2, 1, 2, "1", "2", "3");
@@ -257,7 +258,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(3, 3, "4");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 5, positions.size());
+		assertEquals(5, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2");
 		checkPosition(positions.get(2), 2, 1, 2, "1", "2", "3");
@@ -272,7 +273,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(3, 3, "4");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 5, positions.size());
+		assertEquals(5, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2");
 		checkPosition(positions.get(2), 2, 1, 2, "1", "2", "3");
@@ -287,7 +288,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(3, 3, "4");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 6, positions.size());
+		assertEquals(6, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 0, 1, 0, "1");
 		checkPosition(positions.get(1), 1, 1, 1, "1", "2");
 		checkPosition(positions.get(2), 2, 1, 2, "1", "2", "3");
@@ -303,7 +304,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(36, 1, "1");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 3, positions.size());
+		assertEquals(3, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 5, 1, 0, "1");
 		checkPosition(positions.get(1), 25, 1, 1, "1");
 		checkPosition(positions.get(2), 36, 1, 3, "1");
@@ -324,7 +325,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(120, 4 , "2");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size", 8, positions.size());
+		assertEquals(8, positions.size(), "positions.size");
 		checkPosition(positions.get(0), 120, 4, 11, "1", "2");
 		checkPosition(positions.get(1), 127, 1, 1, "1");
 		checkPosition(positions.get(2), 130, 12, 3, "1", "2");
@@ -351,7 +352,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition(127, 41, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size: "+ positions, 14, positions.size());
+		assertEquals(14, positions.size(), "positions.size: "+ positions);
 		checkPosition(positions.get(0), 120, 4, 11, "1", "2");
 		checkPosition(positions.get(1), 127, 1, 12, "1", "3");
 		checkPosition(positions.get(2), 128, 2, 12, "3");
@@ -374,7 +375,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		acceptor.addPosition( 7, 21, "3");
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size: "+ positions, 4, positions.size());
+		assertEquals(4, positions.size(), "positions.size: "+ positions);
 		checkPosition(positions.get(0), 7, 15, 2, "3");
 		checkPosition(positions.get(1), 22, 4, 0, "1", "3");
 		checkPosition(positions.get(2), 26, 1, 2, "3");
@@ -389,7 +390,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size: "+ positions, 6, positions.size());
+		assertEquals(6, positions.size(), "positions.size: "+ positions);
 		checkPosition(positions.get(0), 0, 6, 0, "1");
 		checkPosition(positions.get(1), 6, 16, 2, "1");
 		checkPosition(positions.get(2), 22, 12, 3, "1");
@@ -409,7 +410,7 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 		
 		acceptor.mergePositions();
 		List<LightweightPosition> positions = acceptor.getPositions();
-		assertEquals("positions.size: "+ positions, 8, positions.size());
+		assertEquals(8, positions.size(), "positions.size: "+ positions);
 		checkPosition(positions.get(0), 58, 19, 0, "1");
 		checkPosition(positions.get(1), 77, 16, 2, "1");
 		checkPosition(positions.get(2), 93, 12, 3, "1");
@@ -423,17 +424,16 @@ public class MergingHighlightedPositionAcceptorTest extends Assert {
 	protected void checkPosition(LightweightPosition position, int offset, int length, int timestamp, String... ids) {
 		assertNotNull(position);
 		if (timestamp >= 0)
-			assertEquals("timestamp", timestamp, position.getTimestamp());
+			assertEquals(timestamp, position.getTimestamp(), "timestamp");
 		if (offset >= 0)
-			assertEquals("offset", offset, position.getOffset());
+			assertEquals(offset, position.getOffset(), "offset");
 		if (length >= 0)
-			assertEquals("length", length, position.getLength());
+			assertEquals(length, position.getLength(), "length");
 		checkIds(ids, position.getIds());
 	}
 	
 	private void checkIds(String[] expected, String[] actual) {
-		assertEquals(Strings.concat(", ", Arrays.asList(actual)) + " vs. " + Strings.concat(", ", Arrays.asList(expected)),
-				actual.length, expected.length);
+		assertEquals(expected.length, actual.length, Strings.concat(", ", Arrays.asList(actual)) + " vs. " + Strings.concat(", ", Arrays.asList(expected)));
 		for(int i = 0; i < actual.length; i++) {
 			assertEquals("at index: " + i, expected[i], actual[i]);
 		}

@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.label;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +19,12 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultEObjectLabelProviderTest extends Assert {
+public class DefaultEObjectLabelProviderTest {
 
 	private static final String DEFAULT_TEXT = "default";
 

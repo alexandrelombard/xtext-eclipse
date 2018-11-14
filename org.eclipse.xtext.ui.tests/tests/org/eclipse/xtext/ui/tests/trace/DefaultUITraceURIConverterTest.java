@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.trace;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
@@ -20,10 +21,9 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -31,11 +31,11 @@ import com.google.inject.name.Named;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DefaultUITraceURIConverterTest extends Assert {
+public class DefaultUITraceURIConverterTest {
 
 	private static IJavaProject project;
 
-	@BeforeClass
+	@BeforeAll
 	public static void createProject() throws Exception {
 		project = createJavaProject("Foo");
 		addSourceFolder(project, "src");
@@ -43,7 +43,7 @@ public class DefaultUITraceURIConverterTest extends Assert {
 		addSourceFolder(project, "main/src");
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void deleteProject() throws Exception {
 		deleteJavaProject(project);
 	}

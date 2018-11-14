@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.refactoring;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -38,13 +39,13 @@ import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
-import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -249,11 +250,11 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 				null, null, null));
 		processor.setNewName(newName);
 		RefactoringStatus initialStatus = processor.checkInitialConditions(new NullProgressMonitor());
-		assertTrue("Initial RefactoringStatus is OK", initialStatus.isOK());
+		assertTrue(initialStatus.isOK(), "Initial RefactoringStatus is OK");
 		RefactoringStatus finalStatus = processor.checkFinalConditions(new NullProgressMonitor(), null);
-		assertTrue("Final RefactoringStatus is OK", finalStatus.isOK());
+		assertTrue(finalStatus.isOK(), "Final RefactoringStatus is OK");
 		final Change change = processor.createChange(new NullProgressMonitor());
-		assertNotNull("RenameElementProcessor created changes", change);
+		assertNotNull(change, "RenameElementProcessor created changes");
 		return change;
 	}
 

@@ -7,17 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.syntaxcoloring;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Arrays;
 
 import org.eclipse.xtext.ide.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.util.Strings;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class LightweightPositionTest extends Assert {
+public class LightweightPositionTest {
 
 	@Test public void testMerge_01() {
 		LightweightPosition pos = new LightweightPosition(1, 1, 1, "1", "2");
@@ -56,8 +57,8 @@ public class LightweightPositionTest extends Assert {
 	}
 	
 	private void checkIds(String[] actual, String... expected) {
-		assertEquals(Strings.concat(", ", Arrays.asList(actual)) + " vs. " + Strings.concat(", ", Arrays.asList(expected)),
-				actual.length, expected.length);
+		assertEquals(actual.length, expected.length,
+				Strings.concat(", ", Arrays.asList(actual)) + " vs. " + Strings.concat(", ", Arrays.asList(expected)));
 		for(int i = 0; i < actual.length; i++) {
 			assertEquals("at index: " + i, expected[i], actual[i]);
 		}

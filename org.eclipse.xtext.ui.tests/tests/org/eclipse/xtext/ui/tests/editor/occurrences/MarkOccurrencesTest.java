@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.occurrences;
 
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.ui.editor.occurrences.DefaultOccurrenceComputer.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,8 +37,7 @@ import org.eclipse.xtext.ui.tests.editor.outline.DisplaySafeSyncer;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 
@@ -131,7 +131,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 		preferenceStoreAccess.getWritablePreferenceStore().setValue(contributor.getPreferenceKey(), isMarkOccurrences);
 	}
 
-	public class ExpectationBuilder extends Assert implements IAnnotationModelListener,
+	public class ExpectationBuilder implements IAnnotationModelListener,
 			IAnnotationModelListenerExtension {
 
 		DisplaySafeSyncer syncer = new DisplaySafeSyncer();
@@ -165,20 +165,20 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 				Position position = event.getPositionOfRemovedAnnotation(a);
 				if (occurrenceComputer.hasAnnotationType(a.getType())) {
 					Triple<String, Integer, Integer> tuple = tuple(a, position);
-					assertTrue("Unexpected removal of " + tuple.toString(), removed.remove(tuple));
+					assertTrue(removed.remove(tuple), "Unexpected removal of " + tuple.toString());
 				}
 			}
-			assertTrue(removed.toString(), removed.isEmpty());
+			assertTrue(removed.isEmpty(), removed.toString());
 			IAnnotationModel annotationModel = event.getAnnotationModel();
 			for (Iterator<Annotation> i = annotationModel.getAnnotationIterator(); i.hasNext();) {
 				Annotation a = i.next();
 				if (occurrenceComputer.hasAnnotationType(a.getType())) {
 					Position position = annotationModel.getPosition(a);
 					Triple<String, Integer, Integer> tuple = tuple(a, position);
-					assertTrue("Unexpected adding of " + tuple.toString(), added.remove(tuple));
+					assertTrue(added.remove(tuple), "Unexpected adding of " + tuple.toString());
 				}
 			}
-			assertTrue(added.toString(), added.isEmpty());
+			assertTrue(added.isEmpty(), added.toString());
 		}
 
 		@Override

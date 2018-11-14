@@ -7,15 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher;
 import org.eclipse.xtext.ui.editor.quickfix.ISimilarityMatcher.Default;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author svenefftinge - Initial contribution and API
  */
-public class DefaultSimilarityMatcherTest extends Assert {
+public class DefaultSimilarityMatcherTest {
 	@Test public void testSimilar() throws Exception {
 		Default matcher = new ISimilarityMatcher.Default();
 		assertTrue(matcher.isSimilar("foo", "foo"));

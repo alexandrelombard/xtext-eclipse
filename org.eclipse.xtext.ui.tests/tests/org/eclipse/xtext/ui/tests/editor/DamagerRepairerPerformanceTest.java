@@ -23,27 +23,27 @@ import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.ui.editor.PresentationDamager;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow
  */
-public class DamagerRepairerPerformanceTest extends Assert implements ITokenScanner {
+public class DamagerRepairerPerformanceTest implements ITokenScanner {
 
 	private static final int MAX = 5000;
 	private IPresentationDamager damager;
 	
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		damager = createRegionDamager();
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		damager = null;
 	}
@@ -100,8 +100,8 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 		}
 		
 		protected void assertEquals(int expStart, int expLength) {
-			Assert.assertEquals("offset", expStart, lastRegion.getOffset());
-			Assert.assertEquals("length", expLength, lastRegion.getLength());
+			Assertions.assertEquals(expStart, lastRegion.getOffset(), "offset");
+			Assertions.assertEquals(expLength, lastRegion.getLength(), "length");
 		}
 	}
 	

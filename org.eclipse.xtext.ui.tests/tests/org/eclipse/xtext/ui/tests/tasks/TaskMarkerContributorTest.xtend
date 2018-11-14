@@ -13,16 +13,17 @@ import org.eclipse.core.resources.IMarker
 import org.eclipse.core.resources.IResource
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor
 import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider
+import org.eclipse.xtext.ui.testing.util.LineDelimiters
+import org.eclipse.xtext.ui.tests.AbstractXtextTests
 import org.eclipse.xtext.ui.tests.internal.TestsActivator
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -32,7 +33,7 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 	@Inject
 	TaskMarkerContributor markerContributor
 
-	@Before
+	@BeforeEach
 	def void setup() {
 		injector = TestsActivator.getInstance.getInjector(
 			TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE)
@@ -70,7 +71,7 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 		getResource(fileToString(file), URI.createFileURI(file.fullPath.toString).toString)
 	}
 
-	@After
+	@AfterEach
 	def void cleanUp() {
 		cleanWorkspace
 	}

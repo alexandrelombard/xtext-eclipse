@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.testing;
 
-import static org.eclipse.xtext.ui.testing.util.LineDelimiters.toPlatform;
+import static org.eclipse.xtext.ui.testing.util.LineDelimiters.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -229,7 +230,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	public ContentAssistProcessorTestBuilder expectContent(String expectation){
-		Assert.assertEquals(expectation, getModel());
+		assertEquals(expectation, getModel());
 		return this;
 	}
 
@@ -351,14 +352,14 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		final String expectation = toPlatform(Strings.concat(Strings.newLine(), sortedExpectations));
 		final String actual = toPlatform(Strings.concat(Strings.newLine(), toString(computeCompletionProposals)));
 		
-		Assert.assertEquals(expectation, actual);
+		assertEquals(expectation, actual);
 		
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
 			String proposedText = toPlatform(getProposedText(completionProposal));
-			Assert.assertTrue("Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
-					actual,
-					sortedExpectations.contains(proposedText));
+			assertTrue(sortedExpectations.contains(proposedText), () -> "Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
+					actual
+					);
 		}
 
 		return this;
@@ -391,8 +392,8 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 				ContentAssistContext.Factory factory = get(ContentAssistContext.Factory.class);
 				ContentAssistContext[] contexts = factory.create(sourceViewer, currentModelToParse.length(), xtextResource);
 				for(ContentAssistContext context: contexts) {
-					Assert.assertTrue("matchString = '" + matchString + "', actual: '" + context.getPrefix() + "'",
-							"".equals(context.getPrefix()) || matchString.equals(context.getPrefix()));
+					assertTrue("".equals(context.getPrefix()) || matchString.equals(context.getPrefix()),
+							"matchString = '" + matchString + "', actual: '" + context.getPrefix() + "'");
 				}
 			} else {
 				Assert.fail("No content assistant for content type " + contentType);
@@ -404,14 +405,14 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	public ContentAssistProcessorTestBuilder assertCursorIsAfter(String text) {
-		Assert.assertTrue("cursor should be after '" + text + "' but it's after " + model.substring(0, getCursorPosition()), 
-				model.substring(getCursorPosition() - text.length()).startsWith(text));
+		assertTrue(model.substring(getCursorPosition() - text.length()).startsWith(text),
+				"cursor should be after '" + text + "' but it's after " + model.substring(0, getCursorPosition()));
 		return this;
 	}
 	
 	public ContentAssistProcessorTestBuilder assertCursorIsBefore(String text) {
-		Assert.assertTrue("cursor should be before '" + text + "' but it's before " + model.substring(getCursorPosition()), 
-				model.substring(getCursorPosition()).startsWith(text));
+		assertTrue(model.substring(getCursorPosition()).startsWith(text),
+				"cursor should be before '" + text + "' but it's before " + model.substring(getCursorPosition()));
 		return this;
 	}
 	
@@ -466,8 +467,8 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 				computedProposals.append(",");
 			}
 		}
-		Assert.assertEquals("expect only " + completionProposalCount + " CompletionProposal item for model '"
-				+ currentModelToParse + "' but got '"+computedProposals+"'", completionProposalCount, computeCompletionProposals.length);
+		assertEquals(completionProposalCount, computeCompletionProposals.length, "expect only " + completionProposalCount + " CompletionProposal item for model '"
+				+ currentModelToParse + "' but got '"+computedProposals+"'");
 
 		return this;
 	}
@@ -644,7 +645,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		}
 		
 		public ProposalTester withDisplayString(String displayString) {
-			Assert.assertEquals("displayString", displayString, proposal.getDisplayString());
+			assertEquals(displayString, proposal.getDisplayString(), "displayString");
 			return this;
 		}
 		

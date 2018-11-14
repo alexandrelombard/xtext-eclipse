@@ -7,17 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.antlr.runtime.BitSet;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Bug326509Test extends Assert {
+public class Bug326509Test {
 
 	public static class TestableParser extends AbstractInternalContentAssistParser {
 
@@ -43,7 +44,7 @@ public class Bug326509Test extends Assert {
 	
 	private TestableParser testMe;
 	
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testMe = new TestableParser();
 	}
@@ -54,7 +55,7 @@ public class Bug326509Test extends Assert {
 		}
 		BitSet[] following = testMe.getFollowing();
 		for(int i = 0; i < following.length && i <= 200; i++) {
-			assertNotNull(Integer.toString(i), following[i]);
+			assertNotNull(following[i], Integer.toString(i));
 		}
 	}
 	

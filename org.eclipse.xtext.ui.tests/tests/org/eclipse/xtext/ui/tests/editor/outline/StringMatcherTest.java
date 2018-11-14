@@ -7,14 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.outline.quickoutline.StringMatcher;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public class StringMatcherTest extends Assert {
+public class StringMatcherTest {
 
 	protected StringMatcher createStringMatcher(String pattern) {
 		return new StringMatcher(pattern, true);

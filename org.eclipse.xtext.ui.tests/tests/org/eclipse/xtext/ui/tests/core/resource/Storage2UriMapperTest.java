@@ -8,19 +8,19 @@
 package org.eclipse.xtext.ui.tests.core.resource;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.xtext.ui.resource.UriValidator;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Storage2UriMapperTest extends Assert {
+public class Storage2UriMapperTest {
 	
 	@Test public void testSimpleFileInProject() throws Exception {
 		createProject("foo");

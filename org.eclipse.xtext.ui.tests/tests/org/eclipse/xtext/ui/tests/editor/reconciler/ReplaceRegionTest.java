@@ -7,19 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.reconciler;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  */
-public class ReplaceRegionTest extends Assert {
+public class ReplaceRegionTest {
 
 	private ReplaceRegion mergedReplace;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		mergedReplace = null;
 	}

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.core.builder.impl;
 
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,18 +19,17 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
+import org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PackageFragmentRootWalkerTest extends Assert {
+public class PackageFragmentRootWalkerTest {
 	
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		IResourcesSetupUtil.cleanWorkspace();
 	}

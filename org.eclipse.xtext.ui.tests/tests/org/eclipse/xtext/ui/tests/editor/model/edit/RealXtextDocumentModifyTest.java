@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.tests.editor.model.edit;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +28,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.testing.AbstractEditorTest;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -63,7 +64,7 @@ public class RealXtextDocumentModifyTest extends AbstractEditorTest {
 				document.replace(grammar.indexOf("Foo"), 3, "Bar");
 			}
 		});
-		assertEquals("IXtextModelListener should not have been directly notified", 1, countDownLatch.getCount());
+		assertEquals(1, countDownLatch.getCount(), "IXtextModelListener should not have been directly notified");
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
@@ -85,7 +86,7 @@ public class RealXtextDocumentModifyTest extends AbstractEditorTest {
 			latchReachedZero = countDownLatch.getCount() <= 0;
 		}
 
-		assertEquals("Reconciler should have notified IXtextModelListener", 0, countDownLatch.getCount());
+		assertEquals(0, countDownLatch.getCount(), "Reconciler should have notified IXtextModelListener");
 	}
 	
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=465082

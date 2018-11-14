@@ -12,14 +12,15 @@ import org.eclipse.xtext.ui.editor.quickfix.AbstractDeclarativeQuickfixProvider
 import org.eclipse.xtext.ui.editor.quickfix.Fix
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor
 import org.eclipse.xtext.validation.Issue
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.eclipse.xtext.ui.editor.quickfix.Fixes
+
+import static org.junit.jupiter.api.Assertions.*
 
 /** 
  * @author Knut Wannheden - Initial contribution and API
  */
-class DeclarativeQuickfixProviderTest extends Assert {
+class DeclarativeQuickfixProviderTest {
 
 	static final String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode"
 	static final String DUMMY_CODE2 = "DeclarativeQuickfixProviderTest.DummyCode2"

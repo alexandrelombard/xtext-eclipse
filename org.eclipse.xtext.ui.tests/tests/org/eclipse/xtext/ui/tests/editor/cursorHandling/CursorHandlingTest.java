@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.cursorHandling;
 
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.testing.AbstractCursorHandlingTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

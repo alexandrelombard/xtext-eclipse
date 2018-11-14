@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.label;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -17,18 +19,17 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class GlobalDescriptionLabelProviderTest extends Assert {
+public class GlobalDescriptionLabelProviderTest {
 
 	private GlobalDescriptionLabelProvider globalDescriptionLabelProvider;
 	
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		globalDescriptionLabelProvider = new GlobalDescriptionLabelProvider();
 	}

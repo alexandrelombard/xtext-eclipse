@@ -3,11 +3,12 @@
  */
 package org.eclipse.xtext.ui.tests.quickfix.ide;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguageStandaloneSetup;
 import org.eclipse.xtext.util.Modules2;
+
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * Initialization support for running Xtext languages without Equinox extension registry.

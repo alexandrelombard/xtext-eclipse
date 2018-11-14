@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.refactoring;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -15,21 +17,20 @@ import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.tests.refactoring.MockRefactoringDocument.MockChange;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class UpdateAcceptorTest extends Assert {
+public class UpdateAcceptorTest {
 
 	private static final String CHANGE_NAME = "My change";
 	private RefactoringUpdateAcceptor updateAcceptor;
 	private URI resourceURI0;
 	private URI resourceURI1;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		updateAcceptor = new RefactoringUpdateAcceptor(new MockRefactoringDocument.Provider());
 		resourceURI0 = URI.createURI("resource0");

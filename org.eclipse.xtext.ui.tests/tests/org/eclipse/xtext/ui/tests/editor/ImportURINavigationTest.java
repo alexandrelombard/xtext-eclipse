@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,24 +20,23 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.xtext.testing.IInjectorProvider;
-import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
+import org.eclipse.xtext.testing.IInjectorProvider;
+import org.eclipse.xtext.testing.InjectWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -43,7 +44,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
+@ExtendWith(InjectionExtension.class)
 @InjectWith(ImportURINavigationTest.InjectorProvider.class)
 public class ImportURINavigationTest {
 
@@ -79,7 +80,7 @@ public class ImportURINavigationTest {
 		}, false);
 	}
 	
-	@After
+	@AfterEach
 	public void tearDown() {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 	}
@@ -97,31 +98,31 @@ public class ImportURINavigationTest {
 			String model = "import '" + uriComputation.exec(first) + "' type MyType extends ASimpleType";
 			resource.load(new StringInputStream(model), null);
 			EcoreUtil.resolveAll(resource);
-			Assert.assertTrue(resource.getErrors().isEmpty());
+			assertTrue(resource.getErrors().isEmpty());
 			
 			IHyperlink[] hyperlinks = helper.createHyperlinksByOffset((XtextResource) resource, model.indexOf("SimpleType"), false);
-			Assert.assertEquals(1, hyperlinks.length);
+			assertEquals(1, hyperlinks.length);
 			IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
-			Assert.assertNull(activePage.getActiveEditor());
+			assertNull(activePage.getActiveEditor());
 			if (expectFQN) {
-				Assert.assertEquals(URI.createURI(first.getLocationURI().toString()), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment());
+				assertEquals(URI.createURI(first.getLocationURI().toString()), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment());
 			} else {
-				Assert.assertEquals(URI.createPlatformResourceURI(first.getFullPath().toString(), true), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment());
+				assertEquals(URI.createPlatformResourceURI(first.getFullPath().toString(), true), ((XtextHyperlink)hyperlinks[0]).getURI().trimFragment());
 			}
 			hyperlinks[0].open();
 			IEditorPart editor = activePage.getActiveEditor();
-			Assert.assertNotNull(editor);
+			assertNotNull(editor);
 			IXtextDocument document = XtextDocumentUtil.get(editor);
 			document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource state) throws Exception {
-					Assert.assertEquals("platform:/resource/importuriuitestlanguage.project/src/first.importuriuitestlanguage", state.getURI().toString());
+					assertEquals("platform:/resource/importuriuitestlanguage.project/src/first.importuriuitestlanguage", state.getURI().toString());
 				}
 			});
-			Assert.assertEquals("type ASimpleType", document.get());
+			assertEquals("type ASimpleType", document.get());
 			IEditorPart newPart = IDE.openEditor(activePage, first);
-			Assert.assertEquals(1, activePage.getEditorReferences().length);
-			Assert.assertEquals(editor, newPart);
+			assertEquals(1, activePage.getEditorReferences().length);
+			assertEquals(editor, newPart);
 		} finally {
 			project.getProject().delete(true, null);
 		}

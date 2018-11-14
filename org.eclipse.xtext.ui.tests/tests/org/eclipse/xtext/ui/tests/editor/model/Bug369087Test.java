@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.model;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Collections;
 
@@ -29,7 +30,7 @@ import org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Injector;

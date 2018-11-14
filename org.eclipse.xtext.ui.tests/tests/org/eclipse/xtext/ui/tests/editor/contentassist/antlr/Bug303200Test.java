@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist.antlr;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Collection;
 
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.ui.tests.AbstractXtextTests;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguageStandaloneSetup;
@@ -18,7 +20,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr.B
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug303200TestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;

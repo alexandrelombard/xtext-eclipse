@@ -7,13 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.outline;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.tests.editor.outline.outlineTest.Model;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -21,7 +23,7 @@ import org.junit.Test;
 public class OutlineSynchronisationTest extends AbstractOutlineWorkbenchTest {
 
 	@Test
-	@Ignore("Fails on CI Server with - TimeoutException: Timeout in Syncer")
+	@Disabled("Fails on CI Server with - TimeoutException: Timeout in Syncer")
 	public void testRenameFile() throws Exception {
 		IPath newPath = file.getFullPath().removeLastSegments(1).append("_new")
 				.addFileExtension(file.getFileExtension());

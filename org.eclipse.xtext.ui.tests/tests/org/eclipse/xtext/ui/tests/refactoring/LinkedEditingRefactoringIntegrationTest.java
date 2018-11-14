@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.tests.refactoring;
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.ui.testing.util.JavaProjectSetupUtil.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -29,10 +30,10 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.ui.testing.AbstractLinkedEditingIntegrationTest;
-import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.internal.TestsActivator;
+import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.google.inject.Inject;
 

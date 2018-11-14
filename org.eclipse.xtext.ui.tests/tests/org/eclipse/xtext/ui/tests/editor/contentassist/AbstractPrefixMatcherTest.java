@@ -7,27 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractPrefixMatcherTest<Matcher extends PrefixMatcher> extends Assert {
+public abstract class AbstractPrefixMatcherTest<Matcher extends PrefixMatcher> {
 
 	protected Matcher matcher;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		matcher = createMatcher();
 	}
 
 	protected abstract Matcher createMatcher();
 	
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		matcher = null;
 	}

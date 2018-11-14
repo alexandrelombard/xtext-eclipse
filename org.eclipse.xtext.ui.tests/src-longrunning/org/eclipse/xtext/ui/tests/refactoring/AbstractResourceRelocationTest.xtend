@@ -16,26 +16,26 @@ import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor
 import org.eclipse.ltk.core.refactoring.RefactoringStatus
 import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testlanguages.fileAware.ui.tests.FileAwareTestLanguageUiInjectorProvider
 import org.eclipse.xtext.ui.XtextProjectHelper
-import org.junit.After
-import org.junit.Before
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.^extension.ExtendWith
 
 import static org.eclipse.xtext.ui.testing.util.IResourcesSetupUtil.*
-import static org.junit.Assert.*
+import static org.junit.jupiter.api.Assertions.*
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 @InjectWith(FileAwareTestLanguageUiInjectorProvider)
-@RunWith(XtextRunner)
+@ExtendWith(InjectionExtension)
 abstract class AbstractResourceRelocationTest {
 	
 	protected IProject project
 	
-	@Before
+	@BeforeEach
 	def void setup() {
 		autobuild = false
 		project = createProject('test')
@@ -43,7 +43,7 @@ abstract class AbstractResourceRelocationTest {
 		addBuilder(project, XtextProjectHelper.BUILDER_ID)
 	}
 	
-	@After
+	@AfterEach
 	def void teardown() {
 		project.delete(true, true, new NullProgressMonitor)
 		autobuild = true
