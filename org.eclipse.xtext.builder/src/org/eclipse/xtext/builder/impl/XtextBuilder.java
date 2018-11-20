@@ -12,6 +12,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.internal.jobs.InternalJob;
@@ -23,6 +25,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.ProgressMonitorWrapper;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
@@ -437,15 +440,26 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Override
 	public ISchedulingRule getRule(int kind, Map<String, String> args) {
+
 		switch (preferences.schedulingOption) {
-			case NULL: return null;
-			case WORKSPACE: return getProject().getWorkspace().getRoot();
-			case PROJECT: return getProject();
-			case ALL_XTEXT_PROJECTS: return new MultiRule(Arrays.stream(
-				getProject().getWorkspace().getRoot().getProjects())
-				.filter(XtextProjectHelper::hasNature)
-				.toArray(ISchedulingRule[]::new));
-			default: throw new IllegalArgumentException();
+			case NULL:
+				return null;
+			case WORKSPACE:
+				return getProject().getWorkspace().getRoot();
+			case PROJECT:
+				return getProject();
+			case ALL_XTEXT_PROJECTS: {
+				IProject implicitProject = getProject().getWorkspace().getRoot().getProject(".org.eclipse.jdt.core.external.folders");
+				Stream<IProject> implicit = Stream.of();
+				if (implicitProject != null) {
+					implicit = Stream.of(implicitProject);
+				}
+				return new MultiRule(Stream.concat(Arrays.stream(getProject().getWorkspace().getRoot().getProjects()).filter(p -> {
+					return XtextProjectHelper.hasNature(p) || ".org.eclipse.jdt.core.external.folders".equals(p.getName());
+				}), implicit).toArray(ISchedulingRule[]::new));
+			}
+			default:
+				throw new IllegalArgumentException();
 		}
 	}
 
